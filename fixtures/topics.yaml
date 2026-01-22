@@ -1,0 +1,99 @@
+- model: courses.topic
+  pk: 1
+  fields:
+    parent: null
+    title: "Foundations of Python & Development Practices"
+    slug: "foundations-of-python"
+    description: "Core Python syntax, execution model, virtualenv, linters, typing and professional development workflows."
+    image: "topics/python.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 2
+  fields:
+    parent: null
+    title: "Data Structures & Algorithms with Python"
+    slug: "data-structures-algorithms"
+    description: "Built-in data structures, algorithmic complexity, sorting/searching, and practical algorithm choice."
+    image: "topics/dsa.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 3
+  fields:
+    parent: null
+    title: "Object-Oriented Design & Patterns"
+    slug: "object-oriented-design-patterns"
+    description: "OOP principles, SOLID, design patterns (Factory, Strategy, Repository) and refactoring techniques."
+    image: "topics/oop.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 4
+  fields:
+    parent: null
+    title: "Relational Databases & ORM (Postgres/MySQL)"
+    slug: "relational-databases-orm"
+    description: "Schema design, indexing, transactions, migrations and ORM best practices (Django ORM/SQLAlchemy)."
+    image: "topics/database.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 5
+  fields:
+    parent: null
+    title: "Web Development with Django"
+    slug: "web-development-django"
+    description: "Django project structure, views, templates, forms, authentication and admin customizations."
+    image: "topics/django.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 6
+  fields:
+    parent: null
+    title: "REST APIs, Auth & Security"
+    slug: "rest-apis-auth-security"
+    description: "API design, versioning, authentication (JWT/OAuth), input validation and OWASP mitigations."
+    image: "topics/api.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 7
+  fields:
+    parent: null
+    title: "Frontend Basics for Backend Developers"
+    slug: "frontend-basics-backend-devs"
+    description: "HTML semantics, CSS layouts (Flex/Grid), essential JavaScript patterns and client integration with APIs."
+    image: "topics/frontend.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 8
+  fields:
+    parent: null
+    title: "Asynchronous Programming & Real-time Features"
+    slug: "asynchronous-programming-realtime"
+    description: "async/await, background tasks (Celery), WebSockets, SSE, and real-time scaling patterns."
+    image: "topics/async.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 9
+  fields:
+    parent: null
+    title: "Testing, CI/CD & Observability"
+    slug: "testing-ci-cd-observability"
+    description: "Unit/integration tests, CI pipelines, structured logging, metrics, tracing and release strategies."
+    image: "topics/testing.png"
+    created_at: "2025-12-11T04:00:00Z"
+
+- model: courses.topic
+  pk: 10
+  fields:
+    parent: null
+    title: "Deployment, Scaling & Production Hardening"
+    slug: "deployment-scaling-production"
+    description: "Docker, Kubernetes basics, autoscaling, secrets management and production hardening techniques."
+    image: "topics/deployment.png"
+    created_at: "2025-12-11T04:00:00Z"

@@ -1,0 +1,1809 @@
+# Quiz 1 questions (Foundations) pk 1-15
+- model: quizzes.question
+  pk: 1
+  fields:
+    quiz: 1
+    text: "What does the Global Interpreter Lock (GIL) primarily affect?"
+    option_a: "Memory allocation across processes"
+    option_b: "Concurrent execution of Python bytecode in threads"
+    option_c: "Garbage collection in PyPy"
+    option_d: "C extension compilation"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 2
+  fields:
+    quiz: 1
+    text: "Why use a virtual environment?"
+    option_a: "To speed up execution"
+    option_b: "To isolate project dependencies"
+    option_c: "To compile to machine code"
+    option_d: "To enable multi-user access"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 3
+  fields:
+    quiz: 1
+    text: "Which file commonly pins exact dependency versions?"
+    option_a: "pyproject.toml"
+    option_b: "README.md"
+    option_c: "requirements.txt or lock file"
+    option_d: "setup.py"
+    correct_option: "C"
+    marks: 1
+
+- model: quizzes.question
+  pk: 4
+  fields:
+    quiz: 1
+    text: "Type hints in Python are used to:"
+    option_a: "Change runtime behavior"
+    option_b: "Provide static type info to tools"
+    option_c: "Increase execution speed"
+    option_d: "Encrypt code"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 5
+  fields:
+    quiz: 1
+    text: "Which command creates a venv with stdlib?"
+    option_a: "python -m venv .venv"
+    option_b: "virtualenv create"
+    option_c: "pipenv init"
+    option_d: "conda create -n env"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 6
+  fields:
+    quiz: 1
+    text: "What does pinning a dependency mean?"
+    option_a: "Deleting it"
+    option_b: "Specifying an exact version"
+    option_c: "Adding to git"
+    option_d: "Installing offline"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 7
+  fields:
+    quiz: 1
+    text: "Black and flake8 are used for:"
+    option_a: "Running services"
+    option_b: "Formatting and linting"
+    option_c: "DB migrations"
+    option_d: "Container orchestration"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 8
+  fields:
+    quiz: 1
+    text: "Why use a src/ project layout?"
+    option_a: "Prevents accidental local imports during tests"
+    option_b: "Makes project smaller"
+    option_c: "Runs faster"
+    option_d: "Required by Python"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 9
+  fields:
+    quiz: 1
+    text: "Semantic versioning format is:"
+    option_a: "Major.Minor.Patch"
+    option_b: "Year.Month.Day"
+    option_c: "Build.Hash.Tag"
+    option_d: "Alpha.Beta.Gamma"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 10
+  fields:
+    quiz: 1
+    text: "A pre-commit hook commonly runs:"
+    option_a: "Database backups"
+    option_b: "Linters and tests before commit"
+    option_c: "Deploy to prod"
+    option_d: "Install OS updates"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 11
+  fields:
+    quiz: 1
+    text: "Lock files ensure:"
+    option_a: "Faster runtime"
+    option_b: "Same dependency tree across installs"
+    option_c: "Automatic security fixes"
+    option_d: "No tests needed"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 12
+  fields:
+    quiz: 1
+    text: "Which is recommended for storing secrets in deployments?"
+    option_a: "Commit to git"
+    option_b: "Environment variables or secret stores"
+    option_c: "Static files"
+    option_d: "Documentation"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 13
+  fields:
+    quiz: 1
+    text: "What does a release pipeline automate?"
+    option_a: "Human-only checks"
+    option_b: "Reproducible builds and tests"
+    option_c: "Bypass tests"
+    option_d: "Increase commit size"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 14
+  fields:
+    quiz: 1
+    text: "Which tool checks static types in Python?"
+    option_a: "pytest"
+    option_b: "mypy"
+    option_c: "black"
+    option_d: "flake8"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 15
+  fields:
+    quiz: 1
+    text: "Why run linters/formatters in CI?"
+    option_a: "Enforce consistency across team"
+    option_b: "Make code slower"
+    option_c: "Skip tests"
+    option_d: "Reduce security"
+    correct_option: "A"
+    marks: 1
+
+# Quiz 2 questions (Data Structures) pk 16-30
+- model: quizzes.question
+  pk: 16
+  fields:
+    quiz: 2
+    text: "Which collection gives average O(1) lookups?"
+    option_a: "list"
+    option_b: "dict"
+    option_c: "deque"
+    option_d: "tuple"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 17
+  fields:
+    quiz: 2
+    text: "Binary search complexity on sorted list:"
+    option_a: "O(n)"
+    option_b: "O(log n)"
+    option_c: "O(n log n)"
+    option_d: "O(1)"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 18
+  fields:
+    quiz: 2
+    text: "Python's default sort algorithm is:"
+    option_a: "QuickSort"
+    option_b: "MergeSort"
+    option_c: "Timsort"
+    option_d: "HeapSort"
+    correct_option: "C"
+    marks: 1
+
+- model: quizzes.question
+  pk: 19
+  fields:
+    quiz: 2
+    text: "Which is best for FIFO queue operations?"
+    option_a: "list"
+    option_b: "dict"
+    option_c: "deque"
+    option_d: "set"
+    correct_option: "C"
+    marks: 1
+
+- model: quizzes.question
+  pk: 20
+  fields:
+    quiz: 2
+    text: "Which data type is hashable if contents are hashable?"
+    option_a: "list"
+    option_b: "set"
+    option_c: "tuple"
+    option_d: "dict"
+    correct_option: "C"
+    marks: 1
+
+- model: quizzes.question
+  pk: 21
+  fields:
+    quiz: 2
+    text: "bisect.insort is used to:"
+    option_a: "Sort arrays in place"
+    option_b: "Insert into sorted list keeping order"
+    option_c: "Reverse a list"
+    option_d: "Merge lists"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 22
+  fields:
+    quiz: 2
+    text: "CountingSort is not comparison-based because it:"
+    option_a: "Uses merging"
+    option_b: "Uses frequency counts"
+    option_c: "Uses recursion"
+    option_d: "Uses heaps"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 23
+  fields:
+    quiz: 2
+    text: "Adjacency list is preferable for:"
+    option_a: "Dense graphs"
+    option_b: "Sparse graphs"
+    option_c: "Never use graphs"
+    option_d: "Matrices only"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 24
+  fields:
+    quiz: 2
+    text: "Inserting using bisect can be O(n) because:"
+    option_a: "Search is slow"
+    option_b: "Shifting elements is O(n)"
+    option_c: "bisect uses recursion"
+    option_d: "It allocates new memory always"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 25
+  fields:
+    quiz: 2
+    text: "Which structure helps frequency counts easily?"
+    option_a: "dict"
+    option_b: "Counter"
+    option_c: "list"
+    option_d: "deque"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 26
+  fields:
+    quiz: 2
+    text: "BFS is preferred for shortest path in what graph type?"
+    option_a: "Weighted graphs"
+    option_b: "Unweighted graphs"
+    option_c: "Directed acyclic graphs only"
+    option_d: "Trees only"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 27
+  fields:
+    quiz: 2
+    text: "Worst-case insertion into dict can be O(n) due to:"
+    option_a: "Constant hashing"
+    option_b: "Rehash/resizing costs"
+    option_c: "Ordered dicts"
+    option_d: "Tuple keys"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 28
+  fields:
+    quiz: 2
+    text: "Which structure is best for membership with average O(1)?"
+    option_a: "list"
+    option_b: "set"
+    option_c: "tuple"
+    option_d: "str"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 29
+  fields:
+    quiz: 2
+    text: "Timsort is adaptive because it:"
+    option_a: "Always uses mergesort"
+    option_b: "Recognizes existing runs"
+    option_c: "Uses quicksort partitioning"
+    option_d: "Is unstable"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 30
+  fields:
+    quiz: 2
+    text: "Use collections.deque when you need:"
+    option_a: "Fast random access"
+    option_b: "Efficient pops from both ends"
+    option_c: "Hashable sequences"
+    option_d: "Immutable sequences"
+    correct_option: "B"
+    marks: 1
+
+# Quiz 3 questions (OOP & Patterns) pk 31-45
+- model: quizzes.question
+  pk: 31
+  fields:
+    quiz: 3
+    text: "Which SOLID principle states a class should have only one reason to change?"
+    option_a: "Open/Closed"
+    option_b: "Single Responsibility"
+    option_c: "Liskov Substitution"
+    option_d: "Dependency Inversion"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 32
+  fields:
+    quiz: 3
+    text: "Strategy pattern encapsulates:"
+    option_a: "Object creation"
+    option_b: "Interchangeable algorithms"
+    option_c: "Persistence concerns"
+    option_d: "Event handling"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 33
+  fields:
+    quiz: 3
+    text: "Dependency inversion encourages:"
+    option_a: "Depend on concrete implementations"
+    option_b: "Depend on abstractions not implementations"
+    option_c: "Avoid interfaces"
+    option_d: "Use globals"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 34
+  fields:
+    quiz: 3
+    text: "Factory pattern primarily helps to:"
+    option_a: "Manage concurrency"
+    option_b: "Centralize object creation"
+    option_c: "Serialize objects"
+    option_d: "Improve UI rendering"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 35
+  fields:
+    quiz: 3
+    text: "Duck typing relies on:"
+    option_a: "Inheritance only"
+    option_b: "Presence of required methods and behavior"
+    option_c: "Static type checks only"
+    option_d: "Memory layout"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 36
+  fields:
+    quiz: 3
+    text: "Which is an anti-pattern?"
+    option_a: "Microservices"
+    option_b: "God object"
+    option_c: "Separation of concerns"
+    option_d: "SOLID adherence"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 37
+  fields:
+    quiz: 3
+    text: "Repository pattern improves:"
+    option_a: "Tight DB coupling"
+    option_b: "Abstraction of persistence"
+    option_c: "UI rendering"
+    option_d: "Network protocols"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 38
+  fields:
+    quiz: 3
+    text: "Protocol (typing.Protocol) provides:"
+    option_a: "Runtime enforcement"
+    option_b: "Structural typing without inheritance"
+    option_c: "Faster execution"
+    option_d: "Memory savings"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 39
+  fields:
+    quiz: 3
+    text: "Extract method refactor is used to:"
+    option_a: "Make larger methods"
+    option_b: "Split complex code into smaller methods"
+    option_c: "Remove tests"
+    option_d: "Inline variables"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 40
+  fields:
+    quiz: 3
+    text: "Open/Closed principle states:"
+    option_a: "Modules open for modification"
+    option_b: "Modules open for extension, closed for modification"
+    option_c: "Use global variables"
+    option_d: "Avoid interfaces"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 41
+  fields:
+    quiz: 3
+    text: "Liskov Substitution means:"
+    option_a: "Subtypes must be replaceable where base types are expected"
+    option_b: "Use only inheritance"
+    option_c: "Avoid polymorphism"
+    option_d: "Prefer globals"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 42
+  fields:
+    quiz: 3
+    text: "Interface segregation encourages:"
+    option_a: "Large monolithic interfaces"
+    option_b: "Small focused interfaces"
+    option_c: "Avoiding interfaces entirely"
+    option_d: "Single database access"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 43
+  fields:
+    quiz: 3
+    text: "Extract class refactor is appropriate when:"
+    option_a: "A class does too much"
+    option_b: "You need to inline functions"
+    option_c: "You remove tests"
+    option_d: "You change database"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 44
+  fields:
+    quiz: 3
+    text: "A benefit of unit tests in refactoring is:"
+    option_a: "They slow development"
+    option_b: "They provide safety for change"
+    option_c: "They remove code coverage"
+    option_d: "They are optional"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 45
+  fields:
+    quiz: 3
+    text: "Which refactor reduces duplicated code?"
+    option_a: "Copy-paste"
+    option_b: "Extract method or introduce shared helper"
+    option_c: "Inline variables"
+    option_d: "Delete tests"
+    correct_option: "B"
+    marks: 1
+
+# Quiz 4 questions (Relational DB & ORM) pk 46-60
+- model: quizzes.question
+  pk: 46
+  fields:
+    quiz: 4
+    text: "Normalization aims to prevent:"
+    option_a: "Slow queries"
+    option_b: "Data redundancy and anomalies"
+    option_c: "Lack of indexes"
+    option_d: "Deployment failures"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 47
+  fields:
+    quiz: 4
+    text: "Which isolation level prevents phantom reads?"
+    option_a: "READ UNCOMMITTED"
+    option_b: "READ COMMITTED"
+    option_c: "REPEATABLE READ"
+    option_d: "SERIALIZABLE"
+    correct_option: "D"
+    marks: 1
+
+- model: quizzes.question
+  pk: 48
+  fields:
+    quiz: 4
+    text: "When should you use raw SQL instead of ORM?"
+    option_a: "Never"
+    option_b: "When ORM generates inefficient SQL for complex queries"
+    option_c: "Only for inserts"
+    option_d: "Only in tests"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 49
+  fields:
+    quiz: 4
+    text: "A covering index contains:"
+    option_a: "Only PK"
+    option_b: "All columns needed by a query"
+    option_c: "No columns"
+    option_d: "Only text columns"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 50
+  fields:
+    quiz: 4
+    text: "Redis is commonly used for:"
+    option_a: "Long-term archival"
+    option_b: "In-memory caching and fast data structures"
+    option_c: "Replacing the primary DB"
+    option_d: "Image processing"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 51
+  fields:
+    quiz: 4
+    text: "EXPLAIN in SQL is used to:"
+    option_a: "Describe columns"
+    option_b: "Show query execution plan"
+    option_c: "Run migrations"
+    option_d: "Validate schema"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 52
+  fields:
+    quiz: 4
+    text: "Migrations should be:"
+    option_a: "Unversioned"
+    option_b: "Stored in VCS and reversible"
+    option_c: "Run manually only in production"
+    option_d: "Ignored"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 53
+  fields:
+    quiz: 4
+    text: "Denormalization trades:"
+    option_a: "Read simplicity for write performance"
+    option_b: "Write simplicity for read performance"
+    option_c: "Security for speed"
+    option_d: "None"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 54
+  fields:
+    quiz: 4
+    text: "transaction.atomic() in Django provides:"
+    option_a: "Async execution"
+    option_b: "Atomic DB transactions"
+    option_c: "Performance optimization"
+    option_d: "Versioning"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 55
+  fields:
+    quiz: 4
+    text: "Indexing always improves:"
+    option_a: "All queries"
+    option_b: "Write performance"
+    option_c: "Read performance for indexed queries but may slow writes"
+    option_d: "Network bandwidth"
+    correct_option: "C"
+    marks: 1
+
+- model: quizzes.question
+  pk: 56
+  fields:
+    quiz: 4
+    text: "When migrating a large table, prefer:"
+    option_a: "Single big migration during peak traffic"
+    option_b: "Online schema change or rolling migration"
+    option_c: "Dropping table immediately"
+    option_d: "No migration"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 57
+  fields:
+    quiz: 4
+    text: "ORM lazy loading may cause:"
+    option_a: "Fewer queries"
+    option_b: "N+1 query problems"
+    option_c: "No difference"
+    option_d: "Improved memory"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 58
+  fields:
+    quiz: 4
+    text: "Materialized views are useful for:"
+    option_a: "Real-time unaggregated data"
+    option_b: "Precomputed expensive queries"
+    option_c: "Replacing primary DB"
+    option_d: "Static files"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 59
+  fields:
+    quiz: 4
+    text: "Foreign keys enforce:"
+    option_a: "Data integrity between tables"
+    option_b: "Faster queries"
+    option_c: "File permissions"
+    option_d: "None"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 60
+  fields:
+    quiz: 4
+    text: "A good primary key should be:"
+    option_a: "Mutable"
+    option_b: "Unique and immutable"
+    option_c: "A long text field"
+    option_d: "Optional"
+    correct_option: "B"
+    marks: 1
+
+# Quiz 5 questions (Django) pk 61-75
+- model: quizzes.question
+  pk: 61
+  fields:
+    quiz: 5
+    text: "When should you split settings?"
+    option_a: "Never"
+    option_b: "To manage environment-specific configs"
+    option_c: "To increase file size"
+    option_d: "Only for tests"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 62
+  fields:
+    quiz: 5
+    text: "Which reduces DB queries in list views?"
+    option_a: "list_select_related and prefetch_related"
+    option_b: "Looping in templates"
+    option_c: "Using raw SQL only"
+    option_d: "Django admin"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 63
+  fields:
+    quiz: 5
+    text: "Class-based views are useful because:"
+    option_a: "They cannot be extended"
+    option_b: "They reduce boilerplate with mixins"
+    option_c: "They remove templates"
+    option_d: "They are faster"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 64
+  fields:
+    quiz: 5
+    text: "login_required decorator is used for:"
+    option_a: "Securing views to authenticated users"
+    option_b: "Caching pages"
+    option_c: "Optimizing DB"
+    option_d: "Handling forms"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 65
+  fields:
+    quiz: 5
+    text: "Serving media in production is best handled by:"
+    option_a: "Django dev server"
+    option_b: "Storage backends like S3 and CDN"
+    option_c: "Embedding in HTML"
+    option_d: "Local file copy in app"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 66
+  fields:
+    quiz: 5
+    text: "Template inheritance helps to:"
+    option_a: "Duplicate HTML"
+    option_b: "Reuse page structure and reduce duplication"
+    option_c: "Remove context data"
+    option_d: "Make templates faster"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 67
+  fields:
+    quiz: 5
+    text: "ModelForm simplifies:"
+    option_a: "Writing forms tied to models with validation"
+    option_b: "Writing SQL"
+    option_c: "Creating migrations"
+    option_d: "Running tests"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 68
+  fields:
+    quiz: 5
+    text: "Recommended security measure for auth?"
+    option_a: "Store passwords in plaintext"
+    option_b: "Use hashed passwords and 2FA"
+    option_c: "Redirect to HTTP"
+    option_d: "Predictable session IDs"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 69
+  fields:
+    quiz: 5
+    text: "Context processors provide:"
+    option_a: "Global template context data"
+    option_b: "Database migrations"
+    option_c: "Static file serving"
+    option_d: "User authentication"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 70
+  fields:
+    quiz: 5
+    text: "Middleware is used for:"
+    option_a: "Cross-cutting concerns like auth and logging"
+    option_b: "Rendering templates"
+    option_c: "Storing migrations"
+    option_d: "Never"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 71
+  fields:
+    quiz: 5
+    text: "Why avoid heavy logic in templates?"
+    option_a: "Templates aren't executed"
+    option_b: "Keep presentation and business logic separate"
+    option_c: "Templates are slow"
+    option_d: "Django blocks logic"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 72
+  fields:
+    quiz: 5
+    text: "Pagination in ListView helps to:"
+    option_a: "Load entire DB in memory"
+    option_b: "Reduce response payload and improve UX"
+    option_c: "Remove need for index"
+    option_d: "Increase CPU usage"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 73
+  fields:
+    quiz: 5
+    text: "Static files in production are best served by:"
+    option_a: "Django runserver"
+    option_b: "Web servers or CDNs"
+    option_c: "Database"
+    option_d: "Client-side only"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 74
+  fields:
+    quiz: 5
+    text: "Admin optimization: use list_display and search_fields to:"
+    option_a: "Display all fields always"
+    option_b: "Improve admin UX and performance"
+    option_c: "Disable admin"
+    option_d: "Run admin on prod only"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 75
+  fields:
+    quiz: 5
+    text: "Internationalization in Django uses:"
+    option_a: "gettext utilities"
+    option_b: "Only static files"
+    option_c: "SQL scripts"
+    option_d: "Docker"
+    correct_option: "A"
+    marks: 1
+
+# Quiz 6 questions (REST & Security) pk 76-90
+- model: quizzes.question
+  pk: 76
+  fields:
+    quiz: 6
+    text: "Which HTTP verb is idempotent and safe?"
+    option_a: "POST"
+    option_b: "GET"
+    option_c: "PATCH"
+    option_d: "DELETE"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 77
+  fields:
+    quiz: 6
+    text: "JWT tokens are:"
+    option_a: "Always secure"
+    option_b: "Stateless tokens that must be securely stored"
+    option_c: "Only for sessions"
+    option_d: "Database-managed"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 78
+  fields:
+    quiz: 6
+    text: "To prevent SQL injection prefer:"
+    option_a: "String concatenation"
+    option_b: "Parameterized queries/ORM"
+    option_c: "Client-side validation"
+    option_d: "No DB"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 79
+  fields:
+    quiz: 6
+    text: "CSRF is mitigated by:"
+    option_a: "Using GET for state changes"
+    option_b: "CSRF tokens and SameSite cookies"
+    option_c: "Insecure cookies"
+    option_d: "No validation"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 80
+  fields:
+    quiz: 6
+    text: "Rate limiting defends mainly against:"
+    option_a: "SQL injection"
+    option_b: "Excessive abusive requests and DoS"
+    option_c: "XSS"
+    option_d: "Caching issues"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 81
+  fields:
+    quiz: 6
+    text: "OAuth2 Authorization Code flow is suited for:"
+    option_a: "Server-side apps"
+    option_b: "Single-page apps only"
+    option_c: "Only CLI tools"
+    option_d: "No one"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 82
+  fields:
+    quiz: 6
+    text: "CSP header helps prevent:"
+    option_a: "SQL injection"
+    option_b: "XSS by controlling script sources"
+    option_c: "CSRF"
+    option_d: "Network latency"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 83
+  fields:
+    quiz: 6
+    text: "Trace IDs in headers help to:"
+    option_a: "Only for caching"
+    option_b: "Correlate logs and traces across services"
+    option_c: "Replace DB"
+    option_d: "Encrypt tokens"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 84
+  fields:
+    quiz: 6
+    text: "Sanitizing HTML is necessary when:"
+    option_a: "Accepting user-generated HTML"
+    option_b: "Only for images"
+    option_c: "Never"
+    option_d: "Only for admins"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 85
+  fields:
+    quiz: 6
+    text: "Where should long-lived tokens be stored in web apps?"
+    option_a: "LocalStorage"
+    option_b: "Secure HttpOnly cookies or server-side storage"
+    option_c: "Public CDN"
+    option_d: "Plaintext files"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 86
+  fields:
+    quiz: 6
+    text: "Idempotent HTTP methods allow:"
+    option_a: "Safe retries without side effects"
+    option_b: "Faster execution"
+    option_c: "Avoid authentication"
+    option_d: "Unlimited requests"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 87
+  fields:
+    quiz: 6
+    text: "URI versioning (e.g., /v1/) advantage is:"
+    option_a: "No client changes"
+    option_b: "Explicit version routing"
+    option_c: "Hiding versions"
+    option_d: "No advantage"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 88
+  fields:
+    quiz: 6
+    text: "Dependency scanning finds:"
+    option_a: "Runtime logic bugs"
+    option_b: "Known vulnerable library versions"
+    option_c: "UI glitches"
+    option_d: "DB deadlocks"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 89
+  fields:
+    quiz: 6
+    text: "Use HTTPS for APIs because it:"
+    option_a: "Encrypts transport preventing eavesdropping"
+    option_b: "Is only for login"
+    option_c: "Is slower"
+    option_d: "Is optional"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 90
+  fields:
+    quiz: 6
+    text: "Input validation should be performed:"
+    option_a: "Only client-side"
+    option_b: "Only server-side"
+    option_c: "Both client and server"
+    option_d: "Not needed"
+    correct_option: "C"
+    marks: 1
+
+# Quiz 7 questions (Frontend) pk 91-105
+- model: quizzes.question
+  pk: 91
+  fields:
+    quiz: 7
+    text: "Which element identifies page main content?"
+    option_a: "div"
+    option_b: "main"
+    option_c: "span"
+    option_d: "section"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 92
+  fields:
+    quiz: 7
+    text: "Flexbox is ideal for:"
+    option_a: "2D layouts"
+    option_b: "1D layouts (row/column)"
+    option_c: "Database queries"
+    option_d: "Server-side rendering"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 93
+  fields:
+    quiz: 7
+    text: "The JS event loop is:"
+    option_a: "Multi-threaded execution"
+    option_b: "Single-threaded with async task queue"
+    option_c: "Database engine"
+    option_d: "CSS parser"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 94
+  fields:
+    quiz: 7
+    text: "ARIA attributes are used to:"
+    option_a: "Add styling"
+    option_b: "Improve accessibility semantics"
+    option_c: "Speed up JS"
+    option_d: "Manage sessions"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 95
+  fields:
+    quiz: 7
+    text: "Optimistic UI pattern does what?"
+    option_a: "Wait for server then update UI"
+    option_b: "Update UI immediately and rollback on error"
+    option_c: "Never update UI"
+    option_d: "Only for images"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 96
+  fields:
+    quiz: 7
+    text: "Progressive enhancement means:"
+    option_a: "Start with JS-only features"
+    option_b: "Start with basic HTML then enhance"
+    option_c: "Ignore accessibility"
+    option_d: "Require frameworks"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 97
+  fields:
+    quiz: 7
+    text: "Modern fetch API is used for:"
+    option_a: "File system access"
+    option_b: "HTTP requests in browsers"
+    option_c: "Server-side only"
+    option_d: "SQL queries"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 98
+  fields:
+    quiz: 7
+    text: "CSS Grid is ideal for:"
+    option_a: "Single-axis layout"
+    option_b: "Two-dimensional layouts"
+    option_c: "Inline text only"
+    option_d: "Database schemas"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 99
+  fields:
+    quiz: 7
+    text: "Why reduce DOM manipulations?"
+    option_a: "To reduce HTTP calls"
+    option_b: "To improve rendering performance"
+    option_c: "To decrease DB CPU"
+    option_d: "To change URLs"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 100
+  fields:
+    quiz: 7
+    text: "Which attribute improves image accessibility?"
+    option_a: "data-src"
+    option_b: "alt"
+    option_c: "style"
+    option_d: "onclick"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 101
+  fields:
+    quiz: 7
+    text: "Keyboard navigation is important because:"
+    option_a: "Only for developers"
+    option_b: "Supports users who cannot use a mouse"
+    option_c: "It is always optional"
+    option_d: "Replaces CSS"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 102
+  fields:
+    quiz: 7
+    text: "Debouncing user input helps to:"
+    option_a: "Send more requests"
+    option_b: "Reduce repeated events like search"
+    option_c: "Block UI"
+    option_d: "Cache DB queries"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 103
+  fields:
+    quiz: 7
+    text: "Avoid inline JS for reasons of:"
+    option_a: "Performance and CSP security"
+    option_b: "Only styling"
+    option_c: "Faster load always"
+    option_d: "Mandatory usage"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 104
+  fields:
+    quiz: 7
+    text: "<article> tag denotes:"
+    option_a: "Inline text"
+    option_b: "A self-contained composition"
+    option_c: "A span replacement"
+    option_d: "Deprecated element"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 105
+  fields:
+    quiz: 7
+    text: "To improve perceived performance use:"
+    option_a: "Blocking rendering"
+    option_b: "Skeleton UIs and lazy loading"
+    option_c: "Load everything synchronously"
+    option_d: "Avoid caching"
+    correct_option: "B"
+    marks: 1
+
+# Quiz 8 questions (Async & Real-time) pk 106-120
+- model: quizzes.question
+  pk: 106
+  fields:
+    quiz: 8
+    text: "Async IO is best for:"
+    option_a: "CPU-bound tasks"
+    option_b: "I/O-bound concurrency"
+    option_c: "Single-threaded CPU tasks"
+    option_d: "Replacing DB"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 107
+  fields:
+    quiz: 8
+    text: "To parallelize CPU-bound work use:"
+    option_a: "asyncio.gather"
+    option_b: "multiprocessing or external workers"
+    option_c: "time.sleep"
+    option_d: "single-threaded loops"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 108
+  fields:
+    quiz: 8
+    text: "Celery is used for:"
+    option_a: "WebSockets"
+    option_b: "Background task processing"
+    option_c: "ORM operations"
+    option_d: "Static files"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 109
+  fields:
+    quiz: 8
+    text: "WebSockets provide:"
+    option_a: "Only server-to-client updates"
+    option_b: "Bidirectional persistent connections"
+    option_c: "File storage"
+    option_d: "DB replication"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 110
+  fields:
+    quiz: 8
+    text: "SSE is similar to:"
+    option_a: "Two-way call"
+    option_b: "One-way server broadcast (like radio)"
+    option_c: "FTP session"
+    option_d: "Database"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 111
+  fields:
+    quiz: 8
+    text: "Idempotent tasks are important because:"
+    option_a: "They prevent side-effects when retried"
+    option_b: "They are always slower"
+    option_c: "They break scaling"
+    option_d: "They reduce testing"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 112
+  fields:
+    quiz: 8
+    text: "Sticky sessions are used when:"
+    option_a: "Stateless APIs"
+    option_b: "In-memory WebSocket routing without centralized broker"
+    option_c: "SQL queries"
+    option_d: "Static assets"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 113
+  fields:
+    quiz: 8
+    text: "Which broker is commonly used to scale WebSocket distribution?"
+    option_a: "SMTP"
+    option_b: "Redis pub/sub or message brokers"
+    option_c: "FTP"
+    option_d: "SQLite"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 114
+  fields:
+    quiz: 8
+    text: "Async functions return:"
+    option_a: "Immediate results"
+    option_b: "Coroutines/futures to await"
+    option_c: "Threads"
+    option_d: "Files"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 115
+  fields:
+    quiz: 8
+    text: "Long polling differs because the server:"
+    option_a: "Holds the request until data available"
+    option_b: "Uses websockets"
+    option_c: "Is synchronous"
+    option_d: "Uses UDP"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 116
+  fields:
+    quiz: 8
+    text: "Message brokers provide:"
+    option_a: "Tight coupling"
+    option_b: "Decoupling producers and consumers"
+    option_c: "Synchronous blocking"
+    option_d: "Faster CPU"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 117
+  fields:
+    quiz: 8
+    text: "Scaling WebSockets challenge:"
+    option_a: "Serving static files"
+    option_b: "Routing persistent connections and state"
+    option_c: "SQL normalization"
+    option_d: "Write-heavy DBs"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 118
+  fields:
+    quiz: 8
+    text: "Kafka partitions help ensure:"
+    option_a: "No ordering"
+    option_b: "Ordering guarantees per partition"
+    option_c: "Random routing"
+    option_d: "Local memory only"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 119
+  fields:
+    quiz: 8
+    text: "Backpressure in streaming systems:"
+    option_a: "Drops all messages"
+    option_b: "Prevents consumers from being overwhelmed"
+    option_c: "Speeds up producers"
+    option_d: "Removes logs"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 120
+  fields:
+    quiz: 8
+    text: "To debug async code use:"
+    option_a: "No logging"
+    option_b: "Structured logging, trace IDs and sampling"
+    option_c: "Only print"
+    option_d: "Disable concurrency"
+    correct_option: "B"
+    marks: 1
+
+# Quiz 9 questions (Testing & CI) pk 121-135
+- model: quizzes.question
+  pk: 121
+  fields:
+    quiz: 9
+    text: "Unit tests should be:"
+    option_a: "Slow and integration heavy"
+    option_b: "Fast, isolated and deterministic"
+    option_c: "Dependent on external APIs"
+    option_d: "Random"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 122
+  fields:
+    quiz: 9
+    text: "Integration tests verify:"
+    option_a: "Single function only"
+    option_b: "Interactions between components"
+    option_c: "Only UI"
+    option_d: "Only DB schema"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 123
+  fields:
+    quiz: 9
+    text: "Which orchestrates CI jobs on GitHub?"
+    option_a: "Docker"
+    option_b: "GitHub Actions"
+    option_c: "pip"
+    option_d: "S3"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 124
+  fields:
+    quiz: 9
+    text: "Feature flags help to:"
+    option_a: "Remove tests"
+    option_b: "Decouple deploy and release"
+    option_c: "Make code slow"
+    option_d: "Encrypt data"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 125
+  fields:
+    quiz: 9
+    text: "Prometheus is used for:"
+    option_a: "Text editing"
+    option_b: "Metrics collection"
+    option_c: "Image processing"
+    option_d: "ORM"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 126
+  fields:
+    quiz: 9
+    text: "Canary deployment means:"
+    option_a: "Deploy to all servers"
+    option_b: "Release to a small subset of users first"
+    option_c: "Only for DBs"
+    option_d: "Never used"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 127
+  fields:
+    quiz: 9
+    text: "Structured logging means:"
+    option_a: "Plain text only"
+    option_b: "JSON or structured entries for parsing"
+    option_c: "No logs"
+    option_d: "Only errors"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 128
+  fields:
+    quiz: 9
+    text: "To speed CI pipelines use:"
+    option_a: "Sequential steps only"
+    option_b: "Caching and parallel jobs"
+    option_c: "Remove tests"
+    option_d: "Older runners"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 129
+  fields:
+    quiz: 9
+    text: "Test fixtures prepare:"
+    option_a: "Deterministic test state"
+    option_b: "Slower tests"
+    option_c: "Avoid assertions"
+    option_d: "Random DB"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 130
+  fields:
+    quiz: 9
+    text: "Runbooks are used for:"
+    option_a: "DB indexing"
+    option_b: "Guided incident response"
+    option_c: "Unit testing"
+    option_d: "CI config"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 131
+  fields:
+    quiz: 9
+    text: "E2E tests are usually:"
+    option_a: "Faster than unit tests"
+    option_b: "Slower and more brittle"
+    option_c: "Unnecessary"
+    option_d: "Always offline"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 132
+  fields:
+    quiz: 9
+    text: "A good rollback strategy involves:"
+    option_a: "No rollback"
+    option_b: "Preserve previous artifacts and automated rollback steps"
+    option_c: "Manual DB editing"
+    option_d: "Deleting servers"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 133
+  fields:
+    quiz: 9
+    text: "TDD stands for:"
+    option_a: "Testing during deployment"
+    option_b: "Write failing tests first, implement code, refactor"
+    option_c: "Testing done occasionally"
+    option_d: "Only manual testing"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 134
+  fields:
+    quiz: 9
+    text: "Synthetic monitoring simulates:"
+    option_a: "Code compilation"
+    option_b: "User journeys to check availability"
+    option_c: "Only DB backups"
+    option_d: "Local dev runs"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 135
+  fields:
+    quiz: 9
+    text: "Canary and blue/green aim to:"
+    option_a: "Increase risk"
+    option_b: "Reduce deployment risk and enable safe rollouts"
+    option_c: "Remove monitoring"
+    option_d: "Only for DBs"
+    correct_option: "B"
+    marks: 1
+
+# Quiz 10 questions (Deployment & Scaling) pk 136-150
+- model: quizzes.question
+  pk: 136
+  fields:
+    quiz: 10
+    text: "Multi-stage Docker builds are used to:"
+    option_a: "Increase image size"
+    option_b: "Separate build and runtime to reduce final image size"
+    option_c: "Store secrets"
+    option_d: "Replace Kubernetes"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 137
+  fields:
+    quiz: 10
+    text: "Kubernetes Service provides:"
+    option_a: "Immutable images"
+    option_b: "Stable network endpoints for pods"
+    option_c: "Database storage"
+    option_d: "CI pipelines"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 138
+  fields:
+    quiz: 10
+    text: "Horizontal scaling means:"
+    option_a: "Increase resources of a single node"
+    option_b: "Add more instances to distribute load"
+    option_c: "Shrink DB"
+    option_d: "Delete logs"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 139
+  fields:
+    quiz: 10
+    text: "Secrets should not be:"
+    option_a: "Stored in env vars in VCS plaintext"
+    option_b: "Managed in a secrets store"
+    option_c: "Rotated frequently"
+    option_d: "Scoped with least privilege"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 140
+  fields:
+    quiz: 10
+    text: "A liveness probe in k8s checks:"
+    option_a: "If app is alive; restart if failing"
+    option_b: "Deployment status"
+    option_c: "Image size"
+    option_d: "User sessions"
+    correct_option: "A"
+    marks: 1
+
+- model: quizzes.question
+  pk: 141
+  fields:
+    quiz: 10
+    text: "A CDN helps to:"
+    option_a: "Serve dynamic DB content"
+    option_b: "Cache and deliver static assets closer to users"
+    option_c: "Run background tasks"
+    option_d: "Replace origin servers"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 142
+  fields:
+    quiz: 10
+    text: "Secrets rotation reduces:"
+    option_a: "Security"
+    option_b: "Window of compromised credentials"
+    option_c: "Deploy speed"
+    option_d: "Monitoring"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 143
+  fields:
+    quiz: 10
+    text: "To reduce cold-start latencies in serverless use:"
+    option_a: "Nothing"
+    option_b: "Provisioned concurrency or warmers"
+    option_c: "Deleting functions"
+    option_d: "Huge images"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 144
+  fields:
+    quiz: 10
+    text: "Resource requests/limits in k8s are used to:"
+    option_a: "Ensure pods never use CPU"
+    option_b: "Guide scheduler and protect node stability"
+    option_c: "Increase cost only"
+    option_d: "Remove monitoring"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 145
+  fields:
+    quiz: 10
+    text: "Immutable infrastructure promotes:"
+    option_a: "In-place changes"
+    option_b: "Replacing servers with new images on deploy"
+    option_c: "Manual edits"
+    option_d: "Lack of automation"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 146
+  fields:
+    quiz: 10
+    text: "Network policies in k8s help to:"
+    option_a: "Allow all traffic"
+    option_b: "Restrict pod-to-pod communication per rules"
+    option_c: "Scale nodes"
+    option_d: "Manage secrets"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 147
+  fields:
+    quiz: 10
+    text: "Autoscaling decisions commonly use metrics like:"
+    option_a: "Random numbers"
+    option_b: "CPU, memory or custom application metrics"
+    option_c: "Time of day only"
+    option_d: "File sizes"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 148
+  fields:
+    quiz: 10
+    text: "Managed services often:"
+    option_a: "Increase operational overhead"
+    option_b: "Offload operational responsibilities and lower time-to-market"
+    option_c: "Are always cheaper"
+    option_d: "Are less secure"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 149
+  fields:
+    quiz: 10
+    text: "Secrets should be accessed by apps via:"
+    option_a: "Hard-coded credentials"
+    option_b: "Secure runtime injection from vault/KMS"
+    option_c: "Public Git"
+    option_d: "Plain text files"
+    correct_option: "B"
+    marks: 1
+
+- model: quizzes.question
+  pk: 150
+  fields:
+    quiz: 10
+    text: "Cost optimization begins with:"
+    option_a: "Removing monitoring"
+    option_b: "Profiling resource usage and rightsizing"
+    option_c: "Adding more servers"
+    option_d: "Ignoring metrics"
+    correct_option: "B"
+    marks: 1

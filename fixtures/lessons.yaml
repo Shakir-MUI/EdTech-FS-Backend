@@ -1,0 +1,2049 @@
+# -------------------------
+# Topic 1 — Lesson 1
+# -------------------------
+- model: courses.lesson
+  pk: 1
+  fields:
+    topic: 1
+    title: "Python Execution Model & GIL"
+    content: |
+      Python’s execution pipeline begins with reading your .py files and compiling them into bytecode—an intermediate form stored in .pyc files. This bytecode is then executed by the CPython Virtual Machine, which pulls instructions from a stack-based system and performs memory allocation, reference counting, and garbage collection.
+
+      A central part of CPython’s runtime is the Global Interpreter Lock (GIL). The GIL ensures only one thread executes Python bytecode at a time, simplifying memory safety but restricting CPU-bound multithreading. Engineers often misinterpret Python threads as parallel when in reality they are interleaved.
+
+      **Engineering Guidance**
+      - Use threads for I/O-bound concurrency (API calls, file streaming, socket operations).
+      - Use multiprocessing for CPU-bound concurrency (image operations, crypto, ML preprocessing).
+      - Use libraries like NumPy or PyTorch that release the GIL for true parallel performance.
+
+      **Code Example: CPU-bound multiprocessing**
+      ```
+      from multiprocessing import Pool
+      import math
+
+      def calc(n):
+          return math.factorial(n)
+
+      if __name__ == "__main__":
+          with Pool(4) as p:
+              print(p.map(calc, [30000, 40000, 50000, 60000]))
+      ```
+
+      **Real-Life Analogy**
+      The GIL is like a one-lane toll booth. Even if multiple cars arrive, only one may pass at a time. Multiprocessing is building multiple toll booths—cars can move in true parallel without blocking.
+
+      Understanding this model lets Full Stack developers design scalable back-end systems capable of handling heavy workloads without misusing threads.
+    order: 1
+
+# -------------------------
+# Topic 1 — Lesson 2
+# -------------------------
+- model: courses.lesson
+  pk: 2
+  fields:
+    topic: 1
+    title: "Virtual Environments & Dependency Isolation"
+    content: |
+      Professional Python development requires strict dependency isolation to ensure reproducibility, avoid version conflicts, and maintain clean CI/CD pipelines. Virtual environments (venv, pipenv, poetry) create self-contained Python environments where each project maintains its own interpreter and dependency set.
+
+      **Why dependency isolation matters**
+      In large-scale systems, mismatched versions of libraries (e.g., Django 4.x vs 5.x) can create production outages. Virtual environments guarantee consistency across developers, staging servers, and CI runners.
+
+      **Best Practices**
+      - Always commit requirements.txt or poetry.lock for reproducible builds.
+      - Avoid `pip install` globally; always activate venv first.
+      - Use `pip freeze > requirements.txt` only for exporting—not for manually editing.
+
+      **Code Example: Creating & activating venv**
+      ```
+      python -m venv venv
+      # Windows
+      venv\Scripts\activate
+      # macOS/Linux
+      source venv/bin/activate
+
+      pip install -r requirements.txt
+      ```
+
+      **Real-Life Analogy**
+      A virtual environment is like giving each project its own dedicated toolbox. If two mechanics share tools without separation, misplaced or incompatible tools slow everyone down. With venv, every project has the exact tools it needs—no conflicts.
+
+      Using isolated environments ensures your Python Full Stack workflow remains stable as your application grows and integrates more dependencies.
+    order: 2
+
+# -------------------------
+# Topic 1 — Lesson 3
+# -------------------------
+- model: courses.lesson
+  pk: 3
+  fields:
+    topic: 1
+    title: "Type Hints, Linters, and Static Analysis"
+    content: |
+      Modern Python encourages strong typing through type hints (PEP 484), enabling static analyzers like mypy and pyright to detect bugs before deployment. Type hints drastically improve code readability, maintainability, and IDE autocomplete.
+
+      **Why Type Hints Matter**
+      In a large full-stack system, functions often change over time. Without type enforcement, bugs propagate silently—especially when multiple developers collaborate. Type hints serve as both documentation and correctness guarantees.
+
+      **Linters & Formatters**
+      - `flake8` detects code smells and unused variables.
+      - `black` enforces consistent formatting.
+      - `isort` organizes imports.
+      - Combined with `pre-commit`, they ensure every commit meets quality standards.
+
+      **Code Example**
+      ```
+      from typing import Dict
+
+      def fetch_user(user_id: int) -> Dict[str, int]:
+          return {"id": user_id}
+      ```
+
+      Running `mypy .` will confirm the contract is respected across your codebase.
+
+      **Real-Life Analogy**
+      Type hints are like architectural blueprints. Without them, contractors (developers) might interpret specifications differently, causing structural defects. With typed interfaces, everyone knows the exact expectations upfront.
+
+      Adopting static analysis early results in significantly fewer production bugs and smoother team collaboration.
+    order: 3
+
+# -------------------------
+# Topic 1 — Lesson 4
+# -------------------------
+- model: courses.lesson
+  pk: 4
+  fields:
+    topic: 1
+    title: "Project Layout & Packaging"
+    content: |
+      Maintaining a clean project structure is essential for scalability, readability, and onboarding new developers. The industry-standard layout includes a src/ directory for application code, a tests/ directory for automated tests, and a pyproject.toml file defining dependencies and metadata.
+
+      **Recommended Structure**
+      ```
+      project/
+        src/
+          app/
+          utils/
+        tests/
+        pyproject.toml
+        Dockerfile
+        README.md
+      ```
+
+      This layout separates source code from configuration and avoids module shadowing issues.
+
+      **Packaging for Distribution**
+      Python projects use pyproject.toml to unify build configuration. Internal back-end packages can be distributed as wheels to avoid repeatedly copying common utilities between microservices.
+
+      **Code Example (minimal pyproject.toml)**
+      ```
+      [build-system]
+      requires = ["setuptools", "wheel"]
+      build-backend = "setuptools.build_meta"
+      ```
+
+      **Real-Life Analogy**
+      A well-structured project is like an organized library. Books (modules) must be categorized predictably, or the entire system becomes unusable. Proper layout improves navigation and long-term maintainability.
+    order: 4
+
+# -------------------------
+# Topic 1 — Lesson 5
+# -------------------------
+- model: courses.lesson
+  pk: 5
+  fields:
+    topic: 1
+    title: "Professional Git Workflows & Releases"
+    content: |
+      Git is the backbone of modern software engineering. Professional workflows involve structured branching, semantic versioning, automated releases, and CI/CD integration. Understanding these workflows ensures clean histories and predictable release cycles.
+
+      **Branching Strategies**
+      - **Trunk-based development:** Recommended for most teams; small, frequent commits merged continuously.
+      - **Gitflow:** Suitable for enterprises with long-running release cycles; uses feature, develop, release, and hotfix branches.
+
+      **Semantic Versioning**
+      Versions follow `MAJOR.MINOR.PATCH`. Breaking changes bump MAJOR, new features bump MINOR, and bug fixes bump PATCH.
+
+      **Code Example**
+      ```
+      git checkout -b feature/auth
+      git commit -m "Add JWT authentication"
+      git merge --no-ff feature/auth
+      git tag -a v1.0.0 -m "Release 1.0.0"
+      ```
+
+      **Real-Life Analogy**
+      Git workflows resemble construction blueprints. Each branch is a controlled workspace, and merging resembles integrating finished components into the main building. Without process discipline, the final structure becomes unstable.
+
+      Adopting professional Git workflows ensures your full-stack systems evolve cleanly and safely as your team grows.
+    order: 5
+
+
+# -------------------------
+# Topic 2 — Lesson 6
+# -------------------------
+- model: courses.lesson
+  pk: 6
+  fields:
+    topic: 2
+    title: "Python Collections: Lists, Tuples, Sets, Dicts"
+    content: |
+      Python’s built-in collections are foundational for writing high-performance backend systems. Each collection type has different time complexities, memory layouts, mutability guarantees, and optimal use-cases.
+
+      **Lists** are dynamic arrays supporting O(1) amortized append operations but O(n) inserts/removals in the middle. They are ideal for ordered sequences, batching operations, pagination, and maintaining queues when combined with deque.
+
+      **Tuples** are immutable sequences. Their immutability allows Python to optimize memory usage and caching strategies, making them valuable for representing fixed structures such as database row keys, configuration constants, and multi-key dictionary lookups.
+
+      **Sets** provide O(1) membership testing using hash tables. They are best suited for deduplication, permission checking, and graph algorithms.
+
+      **Dictionaries** are the most powerful data structure in Python. Since Python 3.7, dicts preserve insertion order, making them suitable for JSON-like objects, routing tables, and caching layers.
+
+      **Code Example**
+      ```
+      from collections import Counter, defaultdict, deque
+
+      # Counting occurrences
+      c = Counter("abracadabra")
+
+      # Fast queue operations
+      q = deque([1, 2, 3])
+      q.appendleft(0)
+
+      # Grouping with defaultdict
+      groups = defaultdict(list)
+      groups["errors"].append("404: Not Found")
+      groups["errors"].append("500: Server Error")
+      ```
+
+      **Real-Life Analogy**
+      Choosing the right data structure is like choosing the right container in logistics. A list is a conveyor belt, a set is a security checkpoint ensuring uniqueness, and a dictionary is a labeled storage cabinet with near-instant retrieval.
+
+      Mastery of collections is essential for building responsive APIs, ML preprocessing pipelines, and scalable microservice architectures.
+    order: 1
+
+# -------------------------
+# Topic 2 — Lesson 7
+# -------------------------
+- model: courses.lesson
+  pk: 7
+  fields:
+    topic: 2
+    title: "Algorithmic Complexity & Profiling"
+    content: |
+      Algorithmic complexity—commonly expressed through Big-O notation—is a mathematical framework for evaluating how code scales with input size. Professional developers must understand both time complexity (execution speed) and space complexity (memory usage) to write efficient programs.
+
+      Python offers multiple tools for profiling performance:
+      - **timeit**: Micro-benchmarking small code segments.
+      - **cProfile**: Identifying slow functions in full programs.
+      - **line_profiler**: Measuring execution time line-by-line.
+
+      **Best Practices**
+      - Avoid premature optimization; measure before refactoring.
+      - Optimize algorithmic design first, low-level code second.
+      - Prefer built-in functions and list comprehensions—they are implemented in optimized C.
+
+      **Code Example**
+      ```
+      import timeit
+
+      # Compare two methods of summation
+      print(timeit.timeit("sum(range(1000))", number=10000))
+      print(timeit.timeit("total=0\nfor x in range(1000): total+=x", number=10000))
+      ```
+
+      **Real-Life Analogy**
+      Algorithmic complexity is like choosing between routes in city traffic. A direct road (O(n)) is fine for small distances, but a congested road becomes problematic as traffic grows. Understanding complexity ensures your code scales like a well-designed highway system.
+
+      Proficiency in profiling prevents performance bottlenecks in large-scale systems, ensuring your backend remains fast as user load increases.
+    order: 2
+
+# -------------------------
+# Topic 2 — Lesson 8
+# -------------------------
+- model: courses.lesson
+  pk: 8
+  fields:
+    topic: 2
+    title: "Sorting, Searching & Timsort"
+    content: |
+      Python’s built-in sorting algorithm, Timsort, is a hybrid algorithm combining merge sort and insertion sort. It is optimized for real-world data patterns, including partially sorted sequences, making it exceptionally performant.
+
+      **Why Timsort Matters**
+      Backend systems often deal with nearly sorted data—timestamps, logs, batched inserts—making Timsort outperform traditional sorting algorithms.
+
+      Python provides several utilities:
+      - `sorted()` returns a new sorted list.
+      - `.sort()` sorts a list in-place.
+      - `bisect` enables binary search for maintaining sorted lists with O(log n) insertions.
+
+      **Code Example**
+      ```
+      import bisect
+
+      arr = [1, 3, 4]
+      bisect.insort(arr, 2)   # arr becomes [1, 2, 3, 4]
+      ```
+
+      **Real-Life Analogy**
+      Timsort behaves like a librarian organizing books on a shelf that is already mostly ordered. Instead of re-sorting everything, the librarian inserts books into the correct spot efficiently.
+
+      Understanding Timsort and binary search empowers developers to handle large datasets, leaderboard rankings, transaction logs, and real-time data streams effectively.
+    order: 3
+
+# -------------------------
+# Topic 2 — Lesson 9
+# -------------------------
+- model: courses.lesson
+  pk: 9
+  fields:
+    topic: 2
+    title: "Hashing, Dictionaries Internals & Collisions"
+    content: |
+      Dictionaries are Python’s flagship data structure, backed by a hash table optimized for speed. When inserting a key, Python computes its hash value and stores it in a sparse table to minimize collisions and maximize lookup performance.
+
+      **Key Concepts**
+      - A hash must be deterministic and consistent.
+      - Collisions occur when different keys produce the same hash.
+      - Python resolves collisions using open addressing and probing.
+      - Resizing occurs when the table becomes too full, doubling the size to maintain O(1) average lookup.
+
+      **When to Implement Custom __hash__ and __eq__**
+      Objects used as dict keys must be immutable and must define logical equality semantics.
+
+      **Code Example**
+      ```
+      class User:
+          def __init__(self, id):
+              self.id = id
+
+          def __hash__(self):
+              return hash(self.id)
+
+          def __eq__(self, other):
+              return isinstance(other, User) and self.id == other.id
+      ```
+
+      **Real-Life Analogy**
+      A hash table is like a giant parking lot with assigned zones. The hash function decides which “zone” a car should park in. Collisions are like two cars being assigned the same spot—Python resolves this by searching nearby slots efficiently.
+
+      Understanding hashing is essential for designing caching layers, routing tables, and high-speed data lookup services.
+    order: 4
+
+# -------------------------
+# Topic 2 — Lesson 10
+# -------------------------
+- model: courses.lesson
+  pk: 10
+  fields:
+    topic: 2
+    title: "Graphs and Trees: Representations & Traversals"
+    content: |
+      Graphs and trees are backbone data structures in software engineering. They represent hierarchical data, routing paths, dependencies, and social relationships.
+
+      **Key Representations**
+      - **Adjacency List**: Efficient for sparse graphs.
+      - **Adjacency Matrix**: Good for dense graphs, O(1) edge lookup.
+      - **Edge List**: Suitable for algorithms that process edges sequentially.
+
+      **Traversals**
+      - **BFS (Breadth-First Search)** explores neighbors first—excellent for shortest path in unweighted graphs.
+      - **DFS (Deep-First Search)** explores deep paths first—used in cycle detection, dependency resolution, and tree exploration.
+
+      **Code Example: BFS**
+      ```
+      from collections import deque
+
+      graph = {
+          "A": ["B", "C"],
+          "B": ["D"],
+          "C": ["E"],
+          "D": [],
+          "E": []
+      }
+
+      def bfs(start):
+          q = deque([start])
+          visited = set()
+
+          while q:
+              node = q.popleft()
+              if node not in visited:
+                  print(node)
+                  visited.add(node)
+                  q.extend(graph[node])
+
+      bfs("A")
+      ```
+
+      **Real-Life Analogy**
+      BFS is like exploring all rooms on one floor of a building before going upstairs. DFS is like walking down a hallway until reaching the end, then backtracking.
+
+      Graph theory is central in building recommendation engines, dependency resolvers, schedulers, route planning systems, and microservice communication graphs.
+    order: 5
+
+
+# -------------------------
+# Topic 3 — Lesson 11
+# -------------------------
+- model: courses.lesson
+  pk: 11
+  fields:
+    topic: 3
+    title: "SOLID Principles in Python"
+    content: |
+      SOLID provides a blueprint for designing robust, maintainable, and scalable object-oriented systems. Although Python is dynamic, these principles strengthen architecture for large full-stack applications.
+
+      **1. Single Responsibility Principle (SRP)**  
+      Every class should have one reason to change. SRP avoids "God classes" handling multiple unrelated concerns.  
+      Example: A UserService should not send emails—that belongs to NotificationService.
+
+      **2. Open/Closed Principle (OCP)**  
+      Systems should be open for extension but closed for modification. Python achieves this through inheritance, mixins, and strategy patterns.
+
+      **3. Liskov Substitution Principle (LSP)**  
+      Subclasses must behave consistently with their parent class. Violations occur when overridden methods break expected behavior.
+
+      **4. Interface Segregation Principle (ISP)**  
+      Clients should not depend on methods they don't use. Python’s `Protocol` class enables interface-like contracts.
+
+      **5. Dependency Inversion Principle (DIP)**  
+      High-level modules should not depend on low-level modules but on abstractions.
+
+      **Code Example**
+      ```
+      from abc import ABC, abstractmethod
+
+      class Repository(ABC):
+          @abstractmethod
+          def get(self, id: int):
+              ...
+
+      class InMemoryRepo(Repository):
+          def __init__(self):
+              self.db = {}
+          def get(self, id: int):
+              return self.db.get(id)
+      ```
+
+      **Real-Life Analogy**  
+      SOLID is like building modular furniture. Each component has one purpose, can be replaced without breaking the whole system, and connects predictably according to agreed standards.
+
+      Applying SOLID ensures Python backends remain easy to modify and extend as business requirements evolve.
+    order: 1
+
+# -------------------------
+# Topic 3 — Lesson 12
+# -------------------------
+- model: courses.lesson
+  pk: 12
+  fields:
+    topic: 3
+    title: "Common Design Patterns: Factory & Strategy"
+    content: |
+      Design patterns provide reusable solutions to common architectural challenges. In Python’s flexible ecosystem, Factory and Strategy patterns are used heavily in web applications, API gateways, and machine-learning pipelines.
+
+      **Factory Pattern**  
+      Used when object creation logic becomes complex or when the exact class to instantiate depends on runtime conditions.
+
+      **Strategy Pattern**  
+      Encapsulates interchangeable algorithms behind a common interface. This allows runtime swapping of behaviors without changing the client code.
+
+      **Code Example (Strategy Pattern)**
+      ```
+      class CompressionStrategy:
+          def compress(self, data): ...
+
+      class ZipStrategy(CompressionStrategy):
+          def compress(self, data):
+              print("ZIP compression")
+
+      class TarStrategy(CompressionStrategy):
+          def compress(self, data):
+              print("TAR compression")
+
+      class Compressor:
+          def __init__(self, strategy):
+              self.strategy = strategy
+          def compress(self, data):
+              self.strategy.compress(data)
+      ```
+
+      **Real-Life Analogy**  
+      Strategy is like selecting a payment method—credit card, UPI, wallet—each uses a different algorithm but the customer-facing interface is identical.
+
+      These patterns help structure Django services cleanly, especially when supporting multiple behaviors such as different authentication mechanisms or caching strategies.
+    order: 2
+
+# -------------------------
+# Topic 3 — Lesson 13
+# -------------------------
+- model: courses.lesson
+  pk: 13
+  fields:
+    topic: 3
+    title: "Refactoring Techniques & Anti-Patterns"
+    content: |
+      Refactoring is the disciplined technique of improving code structure without changing external behavior. It reduces technical debt, enhances readability, and prepares the system for new features.
+
+      **Common Anti-patterns**
+      - God Object: A single class doing too much.
+      - Shotgun Surgery: One small change requires modifying many files.
+      - Cyclic Dependencies: Modules importing each other.
+      - Copy/Paste Programming: Duplicated logic leads to maintenance disasters.
+
+      **Effective Refactoring Techniques**
+      - Extract Method / Extract Class
+      - Replace conditionals with polymorphism
+      - Introduce parameter objects
+      - Encapsulate collections
+
+      **Python Example**
+      ```
+      # Anti-pattern
+      if user.role == "admin":
+          ...
+      elif user.role == "editor":
+          ...
+
+      # Refactored
+      class BaseRole:
+          def permissions(self): ...
+
+      class AdminRole(BaseRole):
+          def permissions(self): return ["ALL"]
+      ```
+
+      **Real-Life Analogy**  
+      Refactoring is like reorganizing a cluttered workshop. Tools remain the same, but rearranging them improves workflow, reduces errors, and makes future expansion easier.
+
+      Professional full-stack projects rely on constant refactoring to avoid code rot and maintain high development velocity.
+    order: 3
+
+# -------------------------
+# Topic 3 — Lesson 14
+# -------------------------
+- model: courses.lesson
+  pk: 14
+  fields:
+    topic: 3
+    title: "Interfaces, Protocols & Abstraction"
+    content: |
+      Python provides multiple ways to express abstractions: ABCs, duck typing, and typing.Protocol. These tools allow developers to define stable contracts, enabling modular and testable architectures.
+
+      **ABCs (Abstract Base Classes)**  
+      Allow explicit method requirements using @abstractmethod. Useful for enforcing structure in large teams.
+
+      **Protocols**  
+      Introduced in Python 3.8+, protocols define behavior by method signatures rather than inheritance. This supports flexible duck typing with type safety.
+
+      **Why Abstraction Matters**  
+      Abstraction reduces coupling between components, making services easier to mock, test, and extend. It enables swapping out implementations, such as changing database engines or replacing payment providers.
+
+      **Code Example**
+      ```
+      from typing import Protocol
+
+      class Storage(Protocol):
+          def save(self, data: dict) -> None: ...
+
+      class S3Storage:
+          def save(self, data):
+              print("Saving to S3...")
+      ```
+
+      **Real-Life Analogy**  
+      Abstraction is like electrical outlets: every device expects a standard interface, regardless of who manufactures the appliance. This predictability makes systems interoperable.
+
+      Mastering abstraction ensures scalable, loosely-coupled full-stack applications.
+    order: 4
+
+# -------------------------
+# Topic 3 — Lesson 15
+# -------------------------
+- model: courses.lesson
+  pk: 15
+  fields:
+    topic: 3
+    title: "Component Design for Web Apps"
+    content: |
+      Component-based design organizes large applications into cohesive, independent modules. In Python web development, components often take the form of services, controllers, repositories, and domain models.
+
+      **Key Principles**
+      - Components should communicate via clear interfaces.
+      - Each component must encapsulate a single area of responsibility.
+      - Cross-cutting concerns (logging, caching, auth) should be handled by middleware or decorators, not core logic.
+
+      **Typical Backend Component Layers**
+      - Controller (HTTP layer)
+      - Service (business logic layer)
+      - Repository (database layer)
+      - Domain models (entities)
+
+      **Code Example**
+      ```
+      class UserService:
+          def __init__(self, repo):
+              self.repo = repo
+
+          def register(self, data):
+              # validation + creation logic
+              return self.repo.create(data)
+      ```
+
+      **Real-Life Analogy**  
+      Component design is like a company structure: HR, Finance, Engineering, and Sales each have defined roles. When roles are mixed, chaos ensues. When responsibilities are clear, scaling the organization becomes easy.
+
+      Well-designed components form the backbone of scalable Django and Flask applications, allowing teams to grow and iterate quickly.
+    order: 5
+
+
+# -------------------------
+# Topic 4 — Lesson 16
+# -------------------------
+- model: courses.lesson
+  pk: 16
+  fields:
+    topic: 4
+    title: "Schema Design & Normalization"
+    content: |
+      Schema design is fundamental to building reliable backend systems. A well-designed schema ensures data consistency, performance, and scalability. Normalization organizes data into logical tables to reduce redundancy and maintain consistency through relational integrity.
+
+      **Key Normal Forms**
+      - 1NF: No repeating groups; atomic values.
+      - 2NF: Every non-key attribute depends on the full primary key.
+      - 3NF: No transitive dependencies; attributes depend only on the key.
+
+      **Practical Application**
+      Over-normalization can slow reads in high-traffic applications, so experienced architects sometimes introduce controlled denormalization—duplicating specific fields for faster lookup in performance-critical endpoints.
+
+      **Example: Course Platform Schema**
+      ```
+      Users(id, username, email)
+      Courses(id, title, description)
+      Lessons(id, course_id, title, order)
+      Quiz(id, lesson_id, total_marks)
+      Questions(id, quiz_id, text, correct_option)
+      ```
+
+      This structure avoids duplication while maintaining relational clarity.
+
+      **Real-Life Analogy**
+      Normalization is like organizing books in a library: each book is placed in exactly one shelf section, making retrieval predictable. Denormalization is like making photocopies of popular books to reduce queue time during peak demand.
+
+      Mastering schema design ensures that your Python backend remains performant even as datasets grow into millions of rows.
+    order: 1
+
+# -------------------------
+# Topic 4 — Lesson 17
+# -------------------------
+- model: courses.lesson
+  pk: 17
+  fields:
+    topic: 4
+    title: "Indexes, Transactions & Isolation Levels"
+    content: |
+      Indexes and transactions are core to database performance and correctness. Indexes speed up data retrieval by allowing the database to locate rows without scanning entire tables.
+
+      **Types of Indexes**
+      - B-Tree Index: Default; ideal for equality and range queries.
+      - Hash Index: Fast equality lookups; limited operator support.
+      - Composite Index: Covers multiple columns; improves filtered queries.
+
+      **Transactions**
+      A transaction groups operations into an atomic unit. If any step fails, the whole operation rolls back. Django offers `transaction.atomic()` for robust transaction handling.
+
+      **Isolation Levels**
+      - READ UNCOMMITTED: Fastest but unsafe; may read dirty data.
+      - READ COMMITTED: Default in many systems; safe for most apps.
+      - REPEATABLE READ: Prevents phantom reads.
+      - SERIALIZABLE: Strongest guarantee; lowest concurrency.
+
+      **Code Example**
+      ```
+      from django.db import transaction
+
+      with transaction.atomic():
+          user.balance -= 50
+          merchant.balance += 50
+      ```
+
+      **Real-Life Analogy**
+      Transactions are like shopping carts: if your credit card fails, the entire purchase is canceled—no partial orders. Indexes are like a book's table of contents, allowing instant lookup instead of scanning every page.
+
+      Designing correct indexing strategies prevents slow queries and deadlocks in high-load production environments.
+    order: 2
+
+# -------------------------
+# Topic 4 — Lesson 18
+# -------------------------
+- model: courses.lesson
+  pk: 18
+  fields:
+    topic: 4
+    title: "ORM Best Practices & When to Use Raw SQL"
+    content: |
+      ORMs like Django’s provide expressive abstractions over SQL, enabling rapid development and safe query construction. However, using ORMs without understanding how they generate SQL can lead to N+1 queries, inefficient joins, and hidden performance bottlenecks.
+
+      **ORM Best Practices**
+      - Use `select_related()` for foreign-key joins.
+      - Use `prefetch_related()` for reverse/many-to-many relations.
+      - Avoid looping queries; use `annotate()` and aggregation functions.
+      - Analyze queries using Django Debug Toolbar or logging.
+
+      **When to Use Raw SQL**
+      - Complex multi-join queries
+      - Bulk inserts/updates for large datasets
+      - Optimized window functions
+      - Vendor-specific features (e.g., PostgreSQL indexing hints)
+
+      **Code Example**
+      ```
+      # Avoiding N+1 problem
+      lessons = Lesson.objects.select_related("topic").all()
+      ```
+
+      **Real-Life Analogy**
+      ORM is like automatic driving—perfect for most situations, but sometimes manual control (raw SQL) is essential for performance tuning.
+
+      Knowing when to bypass the ORM is a critical skill for high-performance backend engineering.
+    order: 3
+
+# -------------------------
+# Topic 4 — Lesson 19
+# -------------------------
+- model: courses.lesson
+  pk: 19
+  fields:
+    topic: 4
+    title: "Migrations & Zero-downtime Schema Changes"
+    content: |
+      As applications evolve, databases must evolve with them. Django migrations automate schema changes, but naive migrations can cause downtime, table locks, and production outages—especially on large tables.
+
+      **Migration Types**
+      - Add Column (safe if nullable or has default)
+      - Remove Column (dangerous without backfill)
+      - Rename Column (safe via database aliasing)
+      - Data Migration (transform existing data)
+
+      **Zero-Downtime Techniques**
+      - Add new columns as NULLABLE first.
+      - Backfill data in batches.
+      - Switch application to use new column.
+      - Remove old column in a later migration.
+      - Avoid long locks with large-table operations.
+
+      **Code Example**
+      ```
+      class Migration(migrations.Migration):
+          operations = [
+              migrations.AddField(
+                  model_name="user",
+                  name="middle_name",
+                  field=models.CharField(max_length=50, null=True),
+              ),
+          ]
+      ```
+
+      **Real-Life Analogy**
+      Zero-downtime migration is like renovating a building while people still live inside. You build temporary supports, update one section at a time, and remove scaffolding only after the structure is stable.
+
+      Understanding these patterns allows teams to deploy schema changes safely in mission-critical production systems.
+    order: 4
+
+# -------------------------
+# Topic 4 — Lesson 20
+# -------------------------
+- model: courses.lesson
+  pk: 20
+  fields:
+    topic: 4
+    title: "Caching Strategies & Read Optimization"
+    content: |
+      Caching reduces database load and improves application responsiveness by storing frequently accessed data in fast in-memory stores like Redis or Memcached.
+
+      **Types of Caches**
+      - Local in-process cache (simple but not shared across servers)
+      - Distributed cache (Redis, Memcached)
+      - HTTP caching (ETags, Cache-Control)
+      - Database caching (materialized views)
+
+      **Cache Invalidation Strategies**
+      - Time-based expiration (TTL)
+      - Manual invalidation on update
+      - Write-through caching
+      - Write-back (lazy) caching
+
+      **Code Example**
+      ```
+      from django.core.cache import cache
+
+      data = cache.get("popular_courses")
+      if not data:
+          data = Course.objects.order_by("-views")[:10]
+          cache.set("popular_courses", data, timeout=300)
+      ```
+
+      **Real-Life Analogy**
+      Caching is like keeping commonly-used tools on your desk instead of fetching them daily from a warehouse. Access becomes instant, and the warehouse (database) handles fewer requests.
+
+      Effective caching strategies can reduce database load by over 80%, especially in read-heavy microservices and API-driven architectures.
+    order: 5
+
+
+# -------------------------
+# Topic 5 — Lesson 21
+# -------------------------
+- model: courses.lesson
+  pk: 21
+  fields:
+    topic: 5
+    title: "Django Project Layout & App Boundaries"
+    content: |
+      Django encourages a modular architecture where functionality is organized into separate apps. A clean project layout improves maintainability, testability, and onboarding. Large-scale production systems rely on strict boundaries to ensure that each app encapsulates a single area of responsibility.
+
+      **Best Practices for Project Layout**
+      - Separate settings into modules (base, dev, prod)
+      - Use a dedicated apps/ directory to group applications
+      - Keep business logic inside services, not views or models
+      - Use config files (.env) for secrets; never commit secrets to Git
+
+      **Recommended Structure**
+      ```
+      project/
+        apps/
+          users/
+          courses/
+          quizzes/
+        config/
+          settings/
+            base.py
+            dev.py
+            prod.py
+        static/
+        templates/
+      ```
+
+      **Why App Boundaries Matter**
+      Poor boundaries lead to spaghetti architecture where apps depend on each other cyclically. Clear boundaries allow independent development, cleaner tests, and easy replacement of entire modules.
+
+      **Real-Life Analogy**
+      App boundaries are like departments in a company. HR should not manage finances, and Finance should not run engineering. Clear separation ensures efficient collaboration and scalability.
+
+      A strong project structure is the foundation of a maintainable full-stack Django system.
+    order: 1
+
+# -------------------------
+# Topic 5 — Lesson 22
+# -------------------------
+- model: courses.lesson
+  pk: 22
+  fields:
+    topic: 5
+    title: "Models, Forms & Admin Efficiency"
+    content: |
+      Django Models, Forms, and Admin collectively provide rapid development capability unmatched by other frameworks. Models define your database layer, Forms handle validation and user input, and the Admin interface provides an automatic CRUD UI for internal teams.
+
+      **Model Best Practices**
+      - Use descriptive field names
+      - Keep business logic out of models (prefer service layer)
+      - Use constraints (unique, foreign keys) to enforce data integrity
+
+      **Forms**
+      Django Forms provide server-side validation, CSRF protection, and cleaned_data access. ModelForms automatically generate form fields from model definitions, reducing boilerplate.
+
+      **Admin Optimization**
+      - Use list_display, search_fields, list_filter
+      - Use select_related to reduce N+1 queries
+      - Override get_queryset for performance
+
+      **Code Example**
+      ```
+      @admin.register(Course)
+      class CourseAdmin(admin.ModelAdmin):
+          list_display = ("title", "created_at")
+          search_fields = ("title",)
+          list_filter = ("level",)
+      ```
+
+      **Real-Life Analogy**
+      Django Admin is like an internal control room. Instead of building dashboards manually, Django gives you a powerful interface for operational tasks, saving weeks of engineering time.
+
+      Mastery of models and admin tooling greatly accelerates development cycles for backend teams.
+    order: 2
+
+# -------------------------
+# Topic 5 — Lesson 23
+# -------------------------
+- model: courses.lesson
+  pk: 23
+  fields:
+    topic: 5
+    title: "Views: CBV vs FBV & Template Organization"
+    content: |
+      Django supports two view styles: Function-Based Views (FBVs) and Class-Based Views (CBVs). Each has strengths depending on complexity and reuse requirements.
+
+      **FBVs**
+      - Simple logic
+      - Easier to read for small endpoints
+      - Ideal for beginners and straightforward tasks
+
+      **CBVs**
+      - Provide built-in mixins like ListView, DetailView, CreateView
+      - Reduce repetitive code across multiple CRUD endpoints
+      - Promote clean layering of logic through inheritance
+
+      **Templates**
+      Templates use inheritance, blocks, and context processors. A clean template hierarchy improves readability and maintainability for front-end teams.
+
+      **Code Example (CBV)**
+      ```
+      class CourseListView(ListView):
+          model = Course
+          template_name = "courses/list.html"
+          context_object_name = "courses"
+      ```
+
+      **Real-Life Analogy**
+      FBVs are like cooking a meal manually—flexible but repetitive. CBVs are like using a structured recipe—it saves time, enforces consistency, and reduces mistakes.
+
+      Choosing between FBVs and CBVs wisely leads to cleaner codebases and faster feature development.
+    order: 3
+
+# -------------------------
+# Topic 5 — Lesson 24
+# -------------------------
+- model: courses.lesson
+  pk: 24
+  fields:
+    topic: 5
+    title: "Auth, Permissions & Secure Flows"
+    content: |
+      Authentication and authorization form the backbone of application security. Django provides robust tools for managing login sessions, permissions, and secure flows such as password resets.
+
+      **Auth Components**
+      - User model: central identity object
+      - Session framework: secure server-side session handling
+      - Authentication backends: pluggable login mechanisms
+
+      **Permissions**
+      - Object-level permissions for fine-grained access control
+      - Role-based access using groups
+      - Custom decorators for restricting views
+
+      **Secure Flows**
+      - Use Django's password hashing (PBKDF2 by default)
+      - Secure password reset emails with expiring tokens
+      - Implement 2FA and CAPTCHA for critical endpoints
+
+      **Code Example**
+      ```
+      @login_required
+      @permission_required("courses.add_course")
+      def create_course(request):
+          ...
+      ```
+
+      **Real-Life Analogy**
+      Authentication is the lock on your door; permissions are the set of keys determining which rooms each person may enter. Good security ensures both identity and access are correctly validated.
+
+      Secure auth flows protect users and uphold the integrity of backend systems.
+    order: 4
+
+# -------------------------
+# Topic 5 — Lesson 25
+# -------------------------
+- model: courses.lesson
+  pk: 25
+  fields:
+    topic: 5
+    title: "Static, Media & Internationalization"
+    content: |
+      Professional Django applications serve static files (CSS, JS) and media files (user uploads) using robust, scalable pipelines. Internationalization (i18n) allows applications to reach global audiences.
+
+      **Static Files**
+      - Use collectstatic to gather static files into a production directory
+      - Serve via CDN for improved global performance
+      - Use hashed filenames for cache busting
+
+      **Media Files**
+      - Store uploads using S3 or other object storage
+      - Never serve media directly from Django in production
+      - Validate file types for security
+
+      **Internationalization**
+      - Use Django’s translation tags `{% trans %}`
+      - Maintain .po files for language strings
+      - Configure locale middleware
+
+      **Code Example**
+      ```
+      STATIC_URL = "/static/"
+      MEDIA_URL = "/media/"
+      STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+      ```
+
+      **Real-Life Analogy**
+      Static files are like printed brochures—identical for every user. Media files are personal documents uploaded by users. Internationalization ensures these materials are readable in every user’s preferred language.
+
+      Optimizing static, media, and i18n systems ensures your full-stack application remains fast, scalable, and accessible worldwide.
+    order: 5
+
+
+# -------------------------
+# Topic 6 — Lesson 26
+# -------------------------
+- model: courses.lesson
+  pk: 26
+  fields:
+    topic: 6
+    title: "RESTful Design & Versioning"
+    content: |
+      REST is the dominant architectural style for backend APIs due to its simplicity, scalability, and HTTP-native semantics. A well-designed REST API conveys meaning through clear resources, predictable URLs, and appropriate HTTP verbs.
+
+      **REST Best Practices**
+      - Use nouns rather than verbs: `/users/`, `/courses/1/lessons/`
+      - Use standard HTTP verbs: GET, POST, PUT, PATCH, DELETE
+      - Ensure statelessness: each request should contain all necessary context
+      - Use pagination for large collections
+      - Use consistent error formats (e.g., {"detail": "..."} in DRF)
+
+      **Versioning Strategies**
+      - URI-based: `/api/v1/...`
+      - Header-based: `Accept: application/vnd.myapp.v2+json`
+      - Query param: `?version=2` (less preferred)
+
+      API versioning preserves backward compatibility and empowers teams to evolve APIs without breaking clients.
+
+      **Code Example (Django DRF Router Versioning)**
+      ```
+      from rest_framework.routers import DefaultRouter
+      router = DefaultRouter()
+      router.register(r"v1/courses", CourseViewSet)
+      ```
+
+      **Real-Life Analogy**
+      Versioning is like road signage upgrades—old roads remain functional while new routes offer improved pathways. This ensures smooth transitions for all drivers (API consumers).
+
+      Proper REST and versioning strategy prevents breaking integrations and supports long-term maintainability.
+    order: 1
+
+# -------------------------
+# Topic 6 — Lesson 27
+# -------------------------
+- model: courses.lesson
+  pk: 27
+  fields:
+    topic: 6
+    title: "Authentication Patterns: Sessions, JWT, OAuth2"
+    content: |
+      Authentication is the backbone of API security. Django supports multiple authentication mechanisms suited for different application types.
+
+      **Session Authentication**
+      - Best for server-rendered apps
+      - Uses secure cookies and server-stored session data
+      - Prevents token theft due to server-side validation
+
+      **JWT Authentication**
+      - Ideal for SPA and mobile clients
+      - Tokens include claims and are validated without DB queries
+      - Requires careful handling: use short expiration, refresh tokens, and secure storage
+
+      **OAuth2**
+      - Standard for third-party delegation (Google/Facebook login)
+      - Uses authorization code flow with PKCE for security
+      - Preferred for multi-service ecosystems
+
+      **Code Example (DRF JWT Login Request)**
+      ```
+      POST /api/token/
+      {
+        "username": "shakir",
+        "password": "1234"
+      }
+      ```
+
+      **Real-Life Analogy**
+      Sessions are like visitor passes stored at reception. JWTs are like stamped tickets carried by the guest: verification happens instantly without checking a list. OAuth2 is like granting a delivery partner temporary access to your building.
+
+      Choosing the right pattern ensures both security and performance for your full-stack system.
+    order: 2
+
+# -------------------------
+# Topic 6 — Lesson 28
+# -------------------------
+- model: courses.lesson
+  pk: 28
+  fields:
+    topic: 6
+    title: "Input Validation, Sanitization & Rate Limiting"
+    content: |
+      Input validation is essential for preventing injection attacks, corrupted data, and server overload. Django and DRF provide robust validation tools, but developers must apply them consistently.
+
+      **Validation Layers**
+      - Serializer validation (DRF): ensures well-structured data
+      - Model validation: enforces domain rules
+      - Custom validators: enforce patterns or complex constraints
+      - Sanitization: strips unsafe characters to prevent XSS or injection
+
+      **Rate Limiting**
+      Prevents abuse and DDoS attacks. Tools:
+      - NGINX rate limiting
+      - DRF throttling classes
+      - Redis-based counters for distributed rate limits
+
+      **Code Example (DRF Serializer Validation)**
+      ```
+      class LoginSerializer(serializers.Serializer):
+          username = serializers.CharField()
+          password = serializers.CharField()
+
+          def validate_username(self, value):
+              if " " in value:
+                  raise serializers.ValidationError("Spaces not allowed.")
+              return value
+      ```
+
+      **Real-Life Analogy**
+      Validation is like airport security: every item entering the system is inspected. Rate limiting is like controlling how many people pass through security per minute to prevent overcrowding.
+
+      Rigorous validation and throttling keep APIs secure under unpredictable traffic loads.
+    order: 3
+
+# -------------------------
+# Topic 6 — Lesson 29
+# -------------------------
+- model: courses.lesson
+  pk: 29
+  fields:
+    topic: 6
+    title: "OWASP Top 10: Prevention Techniques"
+    content: |
+      OWASP Top 10 is the industry standard for identifying the most critical web application vulnerabilities. Understanding these risks is essential for professional backend engineers.
+
+      **Key Vulnerabilities**
+      - Injection (SQL, NoSQL, LDAP)
+      - Broken Authentication
+      - Sensitive Data Exposure
+      - XML External Entities (XXE)
+      - Broken Access Control
+      - Security Misconfiguration
+      - XSS (Cross-Site Scripting)
+      - Insecure Deserialization
+      - Using Components with Known Vulnerabilities
+      - Insufficient Logging & Monitoring
+
+      **Prevention Techniques**
+      - Use parameterized queries in Django ORM
+      - Enforce strong password hashing (PBKDF2, Argon2)
+      - Validate input using serializers
+      - Escape outputs in templates (`{{ variable | escape }}`)
+      - Use HTTPS everywhere
+      - Implement role-based permissions and decorators
+
+      **Code Example**
+      ```
+      # Safe ORM query
+      Course.objects.filter(title__icontains=query)
+      ```
+
+      **Real-Life Analogy**
+      OWASP Top 10 is like a list of the most common fraud schemes in banking. Knowing them ensures safeguards are in place before attackers exploit weaknesses.
+
+      Understanding OWASP empowers engineers to build secure and compliant backend systems.
+    order: 4
+
+# -------------------------
+# Topic 6 — Lesson 30
+# -------------------------
+- model: courses.lesson
+  pk: 30
+  fields:
+    topic: 6
+    title: "API Observability: Logging & Tracing"
+    content: |
+      Observability is the ability to understand a system’s internal state through logs, metrics, and traces. Modern full-stack systems rely heavily on observability for debugging, performance tuning, and incident response.
+
+      **Logging**
+      - Use structured JSON logs
+      - Include correlation IDs for request tracking
+      - Avoid logging sensitive data
+
+      **Metrics**
+      - Track latency, error rate, throughput
+      - Use Prometheus + Grafana for visualization
+      - Create SLIs, SLOs, SLAs for reliability
+
+      **Distributed Tracing**
+      - Tools: OpenTelemetry, Jaeger, Zipkin
+      - Trace request journey across microservices
+      - Helps identify bottlenecks and timeouts
+
+      **Code Example (Python Logging)**
+      ```
+      import logging
+      logger = logging.getLogger("api")
+
+      logger.info("Request received", extra={"user_id": 42, "path": "/courses"})
+      ```
+
+      **Real-Life Analogy**
+      Observability is like the dashboard in an airplane cockpit. Pilots cannot see the engines or fuel tanks directly; they rely on instruments to understand internal state. Engineers rely on logs and traces the same way.
+
+      Robust observability leads to faster debugging and fewer production outages.
+    order: 5
+
+
+# -------------------------
+# Topic 7 — Lesson 31
+# -------------------------
+- model: courses.lesson
+  pk: 31
+  fields:
+    topic: 7
+    title: "Semantic HTML & Accessibility Basics"
+    content: |
+      Semantic HTML provides meaningful structure to web pages, enabling better accessibility, SEO, and browser performance. Screen readers and assistive technologies rely on correct semantics to interpret content accurately.
+
+      **Semantic Elements**
+      - <header>, <nav>, <main>, <section>, <article>, <footer>
+      - <button> instead of clickable <div>
+      - <label> for form inputs to improve accessibility
+
+      **Why It Matters**
+      - Helps screen readers identify page regions
+      - Improves SEO ranking since search engines parse semantics
+      - Enhances maintainability of front-end codebases
+
+      **Accessibility (A11y) Fundamentals**
+      - Provide alternative text for images
+      - Ensure keyboard navigation support
+      - Maintain color contrast ratios
+      - Use ARIA roles sparingly (only when semantics aren't enough)
+
+      **Code Example**
+      ```
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/courses">Courses</a></li>
+        </ul>
+      </nav>
+      ```
+
+      **Real-Life Analogy**
+      Semantic HTML is like labeling rooms in a building. Without labels, visitors (users or screen readers) struggle to navigate. Proper labels improve clarity, accessibility, and usability.
+
+      A full-stack engineer must understand semantic HTML to build accessible interfaces and collaborate effectively with frontend teams.
+    order: 1
+
+# -------------------------
+# Topic 7 — Lesson 32
+# -------------------------
+- model: courses.lesson
+  pk: 32
+  fields:
+    topic: 7
+    title: "CSS Layouts: Flexbox & Grid Patterns"
+    content: |
+      Modern CSS layout systems—Flexbox and Grid—provide powerful tools for building responsive, scalable UI designs. They replace float-based hacks and allow complex layouts with minimal code.
+
+      **Flexbox**
+      - Ideal for 1D layouts (rows or columns)
+      - Controls alignment, spacing, and ordering of items
+      - Useful for navbars, toolbars, cards, media objects
+
+      **Grid**
+      - Ideal for 2D layouts
+      - Supports explicit rows and columns
+      - Useful for dashboards, galleries, responsive templates
+
+      **Responsive Design Best Practices**
+      - Use mobile-first CSS
+      - Prefer fractional units (fr) over fixed px
+      - Combine auto-fit and minmax() for dynamic resizing
+
+      **Code Example**
+      ```
+      .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+      ```
+
+      **Real-Life Analogy**
+      Flexbox is like arranging items in a single row on a shelf. Grid is like arranging items in a multi-row cabinet. Both help structure content efficiently.
+
+      Understanding layout systems is essential for full-stack engineers who manage end-to-end UI delivery.
+    order: 2
+
+# -------------------------
+# Topic 7 — Lesson 33
+# -------------------------
+- model: courses.lesson
+  pk: 33
+  fields:
+    topic: 7
+    title: "JavaScript Fundamentals: Event Loop & Async"
+    content: |
+      JavaScript is single-threaded but highly concurrent thanks to the event loop. Understanding this mechanism is critical for building responsive UIs and efficient API communication.
+
+      **Core Concepts**
+      - Call stack: executes synchronous code
+      - Event loop: orchestrates async callbacks
+      - Microtasks (Promises) vs Macrotasks (setTimeout, I/O)
+      - Non-blocking I/O allows parallel operations despite single-threading
+
+      **Async/Await**
+      Introduced in ES2017, it simplifies handling promises significantly.
+
+      **Code Example**
+      ```
+      async function fetchData() {
+        const res = await fetch("/api/courses");
+        const data = await res.json();
+        console.log(data);
+      }
+      ```
+
+      **Why This Matters**
+      Without understanding async flow, developers accidentally create race conditions, UI freezes, or inefficient API requests.
+
+      **Real-Life Analogy**
+      The event loop is like a restaurant queue: the chef (call stack) cooks one meal at a time, while waiters (async callbacks) handle tasks like taking orders or delivering food concurrently.
+
+      Full-stack developers must deeply understand JS async behavior to build smooth, scalable interfaces.
+    order: 3
+
+# -------------------------
+# Topic 7 — Lesson 34
+# -------------------------
+- model: courses.lesson
+  pk: 34
+  fields:
+    topic: 7
+    title: "State Management & Fetch Patterns"
+    content: |
+      Modern front-end apps require managing complex state: UI state, server state, form state, cache state, and more. Proper state management prevents bugs, redundant API calls, and inconsistent UIs.
+
+      **Types of State**
+      - Local state: controlled within a component
+      - Global state: shared across the app (Redux, Zustand, Vuex)
+      - Server state: data synced from APIs
+
+      **Fetch Patterns**
+      - Debounced fetching for search inputs
+      - Caching responses for repeated queries
+      - Optimistic updates for fast UI response
+      - Pagination and infinite scrolling patterns
+
+      **Code Example**
+      ```
+      async function loadCourses() {
+        try {
+          const res = await fetch("/api/courses");
+          return await res.json();
+        } catch (e) {
+          console.error("Network error", e);
+        }
+      }
+      ```
+
+      **Real-Life Analogy**
+      State management is like managing inventory in a warehouse. The system must know what is in stock, what is arriving, and what has been shipped. Without proper management, chaos ensues.
+
+      Efficient state management is essential for smooth and scalable front-end systems.
+    order: 4
+
+# -------------------------
+# Topic 7 — Lesson 35
+# -------------------------
+- model: courses.lesson
+  pk: 35
+  fields:
+    topic: 7
+    title: "Progressive Enhancement & Keyboard Support"
+    content: |
+      Progressive enhancement ensures your application remains functional even when JavaScript fails or network conditions degrade. Building resilient interfaces is crucial for accessibility and international audiences.
+
+      **Progressive Enhancement Principles**
+      - Base experience must work without JavaScript
+      - Add interactive enhancements only when supported
+      - Provide fallback content for media-heavy pages
+
+      **Keyboard Navigation**
+      - Use tabindex for focusable elements
+      - Ensure all interactive elements are accessible via keyboard
+      - Use :focus-visible CSS for focus styling
+      - Avoid using <div> as buttons; use <button> instead
+
+      **Code Example**
+      ```
+      <button onclick="submitForm()">Submit</button>
+
+      /* Keyboard-visible focus ring */
+      button:focus-visible {
+        outline: 3px solid #0055ff;
+      }
+      ```
+
+      **Real-Life Analogy**
+      Progressive enhancement is like designing elevators with stairs as backup. If the elevator fails (JavaScript fails), users can still navigate the building.
+
+      Accessibility and resilience are indicators of a professionally engineered front-end system.
+    order: 5
+
+
+# -------------------------
+# Topic 8 — Lesson 36
+# -------------------------
+- model: courses.lesson
+  pk: 36
+  fields:
+    topic: 8
+    title: "Async IO: async/await & Event Loop"
+    content: |
+      Asynchronous I/O enables high-performance, non-blocking execution of tasks such as network calls, file reads, and RPC operations. Unlike CPU-bound operations, async I/O focuses on concurrency by allowing a single thread to manage thousands of tasks efficiently.
+
+      **Core Concepts**
+      - Event Loop: Scheduler that manages coroutines
+      - Coroutine: A function defined with async/await
+      - Task: A coroutine scheduled for execution
+      - Non-blocking I/O: Operations that do not block the main thread
+
+      **When to Use Async**
+      - High-concurrency workloads (chat systems, streaming, API aggregators)
+      - Microservices communicating with each other
+      - Real-time dashboards and notifications
+
+      **Code Example**
+      ```
+      import asyncio
+
+      async def fetch_data():
+          await asyncio.sleep(1)
+          return "data loaded"
+
+      async def main():
+          result = await fetch_data()
+          print(result)
+
+      asyncio.run(main())
+      ```
+
+      **Real-Life Analogy**
+      Async IO is like a waiter serving multiple tables. Instead of waiting idly while food is being cooked, they attend other tables simultaneously. This increases throughput dramatically.
+
+      Understanding async/await is mandatory for building modern Python backend services with high concurrency.
+    order: 1
+
+# -------------------------
+# Topic 8 — Lesson 37
+# -------------------------
+- model: courses.lesson
+  pk: 37
+  fields:
+    topic: 8
+    title: "Background Jobs & Celery Patterns"
+    content: |
+      Background job systems allow heavy or slow tasks to be executed outside the request/response cycle, improving API responsiveness and reliability. Celery is the industry standard for distributed task processing in Python.
+
+      **Common Use Cases**
+      - Sending emails or SMS
+      - Generating reports or PDFs
+      - Image/video processing
+      - Cleaning old data
+      - Running scheduled jobs (cron)
+
+      **Celery Architecture**
+      - **Producer**: Django publishes a task
+      - **Broker**: Redis/RabbitMQ queues tasks
+      - **Workers**: Execute tasks asynchronously
+      - **Result Backend**: Stores results (optional)
+
+      **Best Practices**
+      - Make tasks idempotent
+      - Use retries with exponential backoff
+      - Use task chaining for workflows
+      - Limit task arguments (avoid passing large objects)
+
+      **Code Example**
+      ```
+      @shared_task(bind=True, max_retries=3)
+      def send_email(self, user_id):
+          try:
+              ...
+          except Exception as e:
+              self.retry(exc=e, countdown=5)
+      ```
+
+      **Real-Life Analogy**
+      Celery is like outsourcing tasks to specialized workers. Instead of the chef (main API) making deliveries or printing menus, those tasks are delegated to assistants (workers), keeping the kitchen running smoothly.
+
+      Mastering Celery enables scalable asynchronous workloads in production environments.
+    order: 2
+
+# -------------------------
+# Topic 8 — Lesson 38
+# -------------------------
+- model: courses.lesson
+  pk: 38
+  fields:
+    topic: 8
+    title: "WebSockets & Django Channels"
+    content: |
+      WebSockets allow full-duplex communication between client and server, enabling real-time features such as chat, notifications, multiplayer games, and monitoring dashboards.
+
+      Django Channels extends Django to support WebSockets, background tasks, and event-driven architectures using ASGI.
+
+      **Channels Components**
+      - Consumer: Handles WebSocket connect/receive/disconnect events
+      - Channel Layer: Enables message passing between processes (usually Redis)
+      - Routing: Maps WebSocket URLs to consumers
+
+      **Code Example**
+      ```
+      class ChatConsumer(WebsocketConsumer):
+          def connect(self):
+              self.accept()
+              self.send("Welcome to the chat!")
+      ```
+
+      **Scaling**
+      - Requires ASGI server (Daphne, Uvicorn)
+      - Redis channel layer enables horizontal scaling
+      - External load balancers must support WebSocket upgrades
+
+      **Real-Life Analogy**
+      WebSockets are like a telephone call where both parties can talk simultaneously, unlike HTTP which is like sending letters back and forth.
+
+      Understanding Channels is essential for building interactive real-time systems.
+    order: 3
+
+# -------------------------
+# Topic 8 — Lesson 39
+# -------------------------
+- model: courses.lesson
+  pk: 39
+  fields:
+    topic: 8
+    title: "SSE, Long Polling & Polling Trade-offs"
+    content: |
+      While WebSockets provide full-duplex communication, several alternatives exist for streaming server-to-client updates depending on complexity and scalability requirements.
+
+      **Polling**
+      - Client requests updates on a timer (e.g., every 5 seconds)
+      - Simple but wasteful under high load
+      - Suitable for low-frequency updates
+
+      **Long Polling**
+      - Client makes request; server holds it until new data is available
+      - More efficient than normal polling
+      - Works with traditional HTTP stacks
+
+      **Server-Sent Events (SSE)**
+      - One-directional streaming from server to browser
+      - Auto-reconnect support
+      - Lightweight alternative to WebSockets
+
+      **When to Choose What**
+      - Polling: simplest; good for dashboards with low update frequency
+      - Long polling: good compromise for chat-like features
+      - SSE: real-time notifications, stock tickers, IoT updates
+      - WebSockets: gaming, bidirectional apps, collaborative editing
+
+      **Real-Life Analogy**
+      Polling is like repeatedly asking, “Has the package arrived?”.  
+      SSE is like receiving SMS notifications from the courier.  
+      WebSockets are a continuous phone call with the courier.
+
+      Choosing the correct real-time technology impacts performance and user experience significantly.
+    order: 4
+
+# -------------------------
+# Topic 8 — Lesson 40
+# -------------------------
+- model: courses.lesson
+  pk: 40
+  fields:
+    topic: 8
+    title: "Scaling Real-time Systems & Guarantees"
+    content: |
+      Scaling real-time systems requires careful attention to data consistency, event ordering, durability, and throughput. Distributed architectures often involve message brokers such as Kafka, Redis Streams, or RabbitMQ to handle high-speed event ingestion.
+
+      **Key Challenges**
+      - Ordering guarantees: ensuring events are processed in correct order
+      - Delivery semantics: at-most-once, at-least-once, exactly-once
+      - Partitioning: splitting workload across multiple nodes
+      - Backpressure: preventing slow consumers from overwhelming the system
+
+      **Broker Patterns**
+      - **Kafka**: High-throughput event logs with partitioning and retention
+      - **Redis Streams**: Lightweight broker with consumer groups
+      - **RabbitMQ**: Traditional message queue with routing flexibility
+
+      **Code Example (Redis Stream Read Loop)**
+      ```
+      import redis
+      r = redis.Redis()
+
+      while True:
+          messages = r.xread({"event_stream": "0-0"}, block=0)
+          print(messages)
+      ```
+
+      **Real-Life Analogy**
+      Scaling real-time systems is like coordinating multiple airports. Planes (events) must arrive in order, be routed correctly, and not overwhelm runways. Control towers (brokers) manage concurrency and safety.
+
+      Mastering these patterns is required for building resilient real-time backends.
+    order: 5
+
+
+# -------------------------
+# Topic 9 — Lesson 41
+# -------------------------
+- model: courses.lesson
+  pk: 41
+  fields:
+    topic: 9
+    title: "Unit Testing & Test Doubles (pytest)"
+    content: |
+      Unit testing ensures that individual components behave correctly in isolation. Professional engineering teams enforce automated testing to catch regressions before code reaches production.
+
+      **Key Concepts**
+      - Unit Test: Tests a small unit of code (function/class) in isolation
+      - Test Doubles: Fake objects used to simulate dependencies (mocks, stubs, fakes)
+      - Fixtures: Reusable setup code in pytest
+      - Assertions: Verify expected outcomes
+
+      **Best Practices**
+      - Test one behavior per test
+      - Use dependency injection so components can be replaced with mocks easily
+      - Write deterministic tests—no randomness, network calls, or real DB access
+      - Keep tests fast for CI execution
+
+      **Code Example**
+      ```
+      import pytest
+      from unittest.mock import Mock
+
+      def process_order(payment, amount):
+          if payment.charge(amount):
+              return "OK"
+          return "FAIL"
+
+      def test_process_order():
+          payment = Mock()
+          payment.charge.return_value = True
+          assert process_order(payment, 100) == "OK"
+      ```
+
+      **Real-Life Analogy**
+      Unit tests are like checking each part of a car (engine, brakes, lights) before driving. If every component works independently, the whole system is more reliable.
+
+      Strong unit testing culture reduces production bugs dramatically.
+    order: 1
+
+# -------------------------
+# Topic 9 — Lesson 42
+# -------------------------
+- model: courses.lesson
+  pk: 42
+  fields:
+    topic: 9
+    title: "Integration & E2E Testing Strategies"
+    content: |
+      Integration testing verifies interactions between multiple components—database, cache, APIs, message brokers—ensuring the system behaves correctly as a whole.
+
+      **Types of Higher-Level Tests**
+      - Integration Tests: Multiple components interact; DB usually included
+      - End-to-End (E2E): Tests full user flows using tools like Playwright or Cypress
+      - Contract Tests: Verify API schemas between microservices
+
+      **Best Practices**
+      - Use temporary isolated databases for integration tests
+      - Mock external APIs but not internal components
+      - Seed test fixtures to maintain deterministic behavior
+      - Keep E2E minimal (only critical flows)
+
+      **Code Example (Django TestCase)**
+      ```
+      from django.test import TestCase
+      from apps.courses.models import Course
+
+      class CourseIntegrationTest(TestCase):
+          def test_course_creation(self):
+              course = Course.objects.create(title="Python")
+              self.assertEqual(course.title, "Python")
+      ```
+
+      **Real-Life Analogy**
+      Integration tests are like testing how well a car drives on the road—not just checking parts but validating full system behavior.
+
+      Professional full-stack systems require strong integration and E2E coverage.
+    order: 2
+
+# -------------------------
+# Topic 9 — Lesson 43
+# -------------------------
+- model: courses.lesson
+  pk: 43
+  fields:
+    topic: 9
+    title: "CI Pipelines: GitHub Actions Example"
+    content: |
+      Continuous Integration (CI) automates code quality checks with every commit. CI ensures that tests, linters, type checkers, and builds run consistently across all environments, preventing regressions before deployment.
+
+      **Pipeline Stages**
+      - Linting (flake8, black)
+      - Static typing (mypy)
+      - Unit tests (pytest)
+      - Integration tests (Django TestCase)
+      - Build artifacts (Docker images, wheels)
+
+      **Benefits of CI**
+      - Catch bugs early
+      - Enforce code quality
+      - Reduce manual review load
+      - Generate predictable builds
+
+      **Code Example (GitHub Actions YAML)**
+      ```
+      name: CI Pipeline
+
+      on: [push]
+
+      jobs:
+        build:
+          runs-on: ubuntu-latest
+          steps:
+            - uses: actions/checkout@v2
+            - name: Install Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: "3.12"
+            - run: pip install -r requirements.txt
+            - run: pytest
+      ```
+
+      **Real-Life Analogy**
+      CI is like a manufacturing assembly line inspection—every product is tested before leaving the factory. If one check fails, the product never ships.
+
+      CI pipelines are mandatory for professional backend engineering.
+    order: 3
+
+# -------------------------
+# Topic 9 — Lesson 44
+# -------------------------
+- model: courses.lesson
+  pk: 44
+  fields:
+    topic: 9
+    title: "Observability: Metrics, Logging & Traces"
+    content: |
+      Observability enables engineers to understand the internal state of complex distributed systems. Without proper observability, debugging production issues becomes guesswork.
+
+      **Metrics**
+      - Latency (P50, P95, P99)
+      - Throughput (requests/second)
+      - Error Rates
+      - Resource Usage (CPU, memory)
+
+      Tools: Prometheus, Grafana
+
+      **Structured Logging**
+      - Logs must be machine-parseable (JSON)
+      - Include correlation/request IDs
+      - Avoid logging sensitive information
+
+      **Distributed Tracing**
+      - Tracks request flow through microservices
+      - Identifies bottlenecks and failures
+      - Tools: OpenTelemetry, Jaeger, Zipkin
+
+      **Code Example (Structured Logging)**
+      ```
+      import logging
+      logger = logging.getLogger("api")
+
+      logger.info("course_fetched", extra={
+          "course_id": 5,
+          "user_id": 42,
+          "latency_ms": 123
+      })
+      ```
+
+      **Real-Life Analogy**
+      Observability is like a plane’s cockpit dashboard—without instruments, pilots cannot navigate or detect failures. Engineers rely on observability tools in the same way.
+
+      Strong observability practices reduce downtime and accelerate incident response.
+    order: 4
+
+# -------------------------
+# Topic 9 — Lesson 45
+# -------------------------
+- model: courses.lesson
+  pk: 45
+  fields:
+    topic: 9
+    title: "Safe Deployments: Canary & Blue/Green"
+    content: |
+      Modern deployment strategies aim to minimize risk during production releases. Safe deployment patterns ensure new versions are tested in real environments without affecting all users immediately.
+
+      **Blue/Green Deployment**
+      - Two identical environments: blue (current) and green (new)
+      - Traffic switches to green only after validation
+      - Enables instant rollback
+
+      **Canary Deployment**
+      - Release new version to a subset of users (1–5%)
+      - Monitor metrics: errors, latency, throughput
+      - Gradually increase traffic if stable
+
+      **Feature Flags**
+      - Enable/disable features at runtime
+      - Separate deployment from feature release
+      - Allow A/B testing and staged rollouts
+
+      **Deployment Safety Checks**
+      - Health checks
+      - Automated rollback on failure
+      - Database backward compatibility
+      - Error budget monitoring (SLOs)
+
+      **Real-Life Analogy**
+      Canary deployment is like sending a few miners with a canary bird into a tunnel before the full crew arrives. If the bird reacts poorly, the tunnel is unsafe—avoiding large-scale disaster.
+
+      Safe deployments ensure reliability and reduce production incidents in large-scale systems.
+    order: 5
+
+
+# -------------------------
+# Topic 10 — Lesson 46
+# -------------------------
+- model: courses.lesson
+  pk: 46
+  fields:
+    topic: 10
+    title: "Docker Best Practices & Multi-stage Builds"
+    content: |
+      Docker enables reproducible, isolated environments for deploying Python applications. A well-crafted Dockerfile drastically improves image size, security, and performance.
+
+      **Common Problems with Poor Docker Images**
+      - Large image size (slow deployments)
+      - Leaking secrets in layers
+      - Installing unnecessary build tools
+      - Running apps as root (security risk)
+
+      **Multi-stage Builds**
+      Multi-stage builds separate build and runtime environments:
+      - Builder Stage: compiles dependencies, builds wheels
+      - Final Stage: contains only the minimal production environment
+
+      **Example Multi-stage Dockerfile**
+      ```
+      FROM python:3.12-slim AS builder
+      WORKDIR /app
+      COPY requirements.txt .
+      RUN pip install --user -r requirements.txt
+
+      FROM python:3.12-slim
+      WORKDIR /app
+      COPY --from=builder /root/.local /root/.local
+      COPY . .
+      CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+      ```
+
+      **Best Practices**
+      - Use slim/alpine images for smaller footprints
+      - Avoid COPY . /app until necessary to leverage build caching
+      - Never store secrets in Dockerfile or layers
+      - Always specify pinned dependency versions
+
+      **Real-Life Analogy**
+      Multi-stage builds are like cooking in a kitchen separate from the dining area. You prepare ingredients (builder stage) and deliver only the final dish (runtime stage) without exposing the messy process.
+
+      Mastery of Docker ensures consistent builds and reliable deployments across all environments.
+    order: 1
+
+# -------------------------
+# Topic 10 — Lesson 47
+# -------------------------
+- model: courses.lesson
+  pk: 47
+  fields:
+    topic: 10
+    title: "Kubernetes Basics: Pods, Deployments & Services"
+    content: |
+      Kubernetes (K8s) is the industry-standard container orchestration platform enabling high availability, scalability, and declarative deployments for microservices.
+
+      **Core Kubernetes Primitives**
+      - **Pod**: Smallest deployable unit; wraps containers
+      - **Deployment**: Manages replicas, rollouts, rollbacks
+      - **Service**: Stable networking endpoint for pods
+      - **ConfigMap**: Stores configuration data
+      - **Secret**: Stores sensitive values (base64-encoded)
+      - **Ingress**: Exposes HTTP routes with load balancing
+
+      **Key Advantages**
+      - Self-healing (restarts failed pods)
+      - Horizontal scaling via HPA
+      - Rolling deployments
+      - Strong configuration isolation
+
+      **Example Deployment**
+      ```
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: django-api
+      spec:
+        replicas: 3
+        selector:
+          matchLabels:
+            app: django-api
+        template:
+          metadata:
+            labels:
+              app: django-api
+          spec:
+            containers:
+              - name: api
+                image: myapp:1.0
+                ports:
+                  - containerPort: 8000
+      ```
+
+      **Real-Life Analogy**
+      Kubernetes is like a modern airport control system—planes (containers) land, take off, get rerouted, or replaced automatically to ensure smooth, continuous operation.
+
+      Understanding Kubernetes is crucial for deploying scalable full-stack systems in production.
+    order: 2
+
+# -------------------------
+# Topic 10 — Lesson 48
+# -------------------------
+- model: courses.lesson
+  pk: 48
+  fields:
+    topic: 10
+    title: "Scaling Strategies & Caching Layers"
+    content: |
+      Scaling systems involves understanding load patterns, failure modes, and performance bottlenecks. Systems scale primarily through horizontal scaling, vertical scaling, and intelligent caching.
+
+      **Vertical Scaling**
+      - Adding more CPU/RAM to existing nodes
+      - Easy but limited; costs increase rapidly
+
+      **Horizontal Scaling**
+      - Add more nodes (pods/machines)
+      - Enables distributed workloads and fault tolerance
+      - Requires stateless services for effective scaling
+
+      **Caching Layers**
+      - Redis for user sessions, rate limits, leaderboard data
+      - CDN for static file distribution
+      - Application-level caching for database-heavy endpoints
+
+      **Load Balancing**
+      - Round robin
+      - Least connections
+      - Weighted distribution
+
+      **Code Example (Redis Cache Integration)**
+      ```
+      from django.core.cache import cache
+      data = cache.get("home_page_data")
+      if not data:
+          data = compute_data()
+          cache.set("home_page_data", data, timeout=3600)
+      ```
+
+      **Real-Life Analogy**
+      Scaling is like adding extra checkout counters in a supermarket during peak hours. More counters (horizontal scaling) reduce customer wait time dramatically.
+
+      Effective scaling design ensures your system handles traffic spikes gracefully.
+    order: 3
+
+# -------------------------
+# Topic 10 — Lesson 49
+# -------------------------
+- model: courses.lesson
+  pk: 49
+  fields:
+    topic: 10
+    title: "Secrets Management & Network Security"
+    content: |
+      Security is a top priority in modern cloud-native systems. Secrets management ensures sensitive information such as database passwords, API keys, and certificates are stored and transmitted securely.
+
+      **Secret Management Tools**
+      - AWS KMS / Secrets Manager
+      - HashiCorp Vault
+      - Kubernetes Secrets (base64-encoded; use with caution)
+      - environment variables with encryption at rest
+
+      **Security Best Practices**
+      - Never commit secrets to Git
+      - Rotate credentials regularly
+      - Use TLS everywhere
+      - Enforce network policies to restrict pod-to-pod access
+      - Apply the Principle of Least Privilege (PoLP)
+
+      **Example Kubernetes Secret**
+      ```
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: db-secret
+      data:
+        PASSWORD: cG9zdGdyZXNxbg==
+      ```
+
+      **Network Security**
+      - Use service mesh (Istio/Linkerd) for mTLS
+      - Implement firewall rules and access control lists
+      - Apply rate limiting at ingress level
+
+      **Real-Life Analogy**
+      Secrets management is like storing diamonds in a vault, not in your desk drawer. Even trusted employees should only access what they absolutely need.
+
+      Proper secret handling prevents catastrophic security breaches.
+    order: 4
+
+# -------------------------
+# Topic 10 — Lesson 50
+# -------------------------
+- model: courses.lesson
+  pk: 50
+  fields:
+    topic: 10
+    title: "Cost Optimization & Production Observability"
+    content: |
+      Cost optimization is a critical part of running cloud applications. Poor resource allocation leads to unnecessary expenses, while good observability enables cost-driven engineering decisions.
+
+      **Cost Optimization Techniques**
+      - Rightsize compute nodes (avoid overprovisioning)
+      - Use auto-scaling instead of fixed replica counts
+      - Move static content to CDN to reduce server load
+      - Use spot/preemptible instances for non-critical workers
+      - Archive cold data to cheaper storage tiers
+
+      **Observability for Cost Insights**
+      - Monitor CPU/memory utilization
+      - Track database query frequency & cache hit rate
+      - Analyze API latency to identify bottlenecks
+      - Implement alerting for anomalies
+
+      **Code Example (Prometheus Metrics Export)**
+      ```
+      from prometheus_client import Counter
+
+      request_count = Counter("api_requests", "Total API Requests")
+      def record():
+          request_count.inc()
+      ```
+
+      **Real-Life Analogy**
+      Cost optimization is like managing electricity usage in a factory. Without meters (observability), you cannot reduce waste. With detailed insights, you can shut down unused machines and scale up efficiently when production increases.
+
+      Efficient cost management and production-grade observability ensure business sustainability and operational excellence.
+    order: 5

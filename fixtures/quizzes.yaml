@@ -1,0 +1,69 @@
+- model: quizzes.quiz
+  pk: 1
+  fields:
+    topic: 1
+    title: "Foundations Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 2
+  fields:
+    topic: 2
+    title: "Data Structures & Algorithms Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 3
+  fields:
+    topic: 3
+    title: "OOP & Design Patterns Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 4
+  fields:
+    topic: 4
+    title: "Relational DB & ORM Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 5
+  fields:
+    topic: 5
+    title: "Django Web Development Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 6
+  fields:
+    topic: 6
+    title: "REST & Security Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 7
+  fields:
+    topic: 7
+    title: "Frontend Essentials Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 8
+  fields:
+    topic: 8
+    title: "Async & Real-time Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 9
+  fields:
+    topic: 9
+    title: "Testing & CI Quiz"
+    total_marks: 15
+
+- model: quizzes.quiz
+  pk: 10
+  fields:
+    topic: 10
+    title: "Deployment & Scaling Quiz"
+    total_marks: 15
