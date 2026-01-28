@@ -4,9 +4,15 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn music_backend.wsgi:application
+    startCommand: gunicorn edtech.wsgi:application
     envVars:
-      - key: DJANGO_SECRET_KEY
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
         sync: false
       - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: GROQ_API_KEY
         sync: false
