@@ -1,16 +1,25 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
-load_dotenv()
+# Load env only for local development
+if os.path.exists(".env"):
+    load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# ======================
+# SECURITY
+# ======================
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key")
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
+# ======================
+# APPLICATIONS
+# ======================
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -18,17 +27,24 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Third-party
     "rest_framework",
     "corsheaders",
+
+    # Local apps
     "apps.accounts",
     "apps.courses",
     "apps.quizzes",
     "apps.chatbot",
 ]
 
-
+# ======================
+# MIDDLEWARE
+# ======================
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -40,12 +56,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "edtech.urls"
 
-# ------- CORS ------
-CORS_ALLOW_ALL_ORIGINS = True
-# If needed, you can restrict later using:
-# CORS_ALLOWED_ORIGINS = [os.getenv("FRONTEND_ORIGIN")]
-
-# ------- Templates (FULL BLOCK REQUIRED) ------
+# ======================
+# TEMPLATES
+# ======================
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -64,47 +77,57 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "edtech.wsgi.application"
 
-# ------- Database (MySQL / WAMP) -------
+# ======================
+# DATABASE (RENDER)
+# ======================
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASS"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        },
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
 
-
-# ------- Password Validators -------
+# ======================
+# PASSWORD VALIDATION
+# ======================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# ------- Localization -------
+# ======================
+# INTERNATIONALIZATION
+# ======================
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
+# ======================
+# STATIC FILES (RENDER)
+# ======================
 STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-# ------- REST Framework -------
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# ======================
+# MEDIA FILES
+# ======================
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+# ======================
+# CORS
+# ======================
+CORS_ALLOW_ALL_ORIGINS = True
+
+# ======================
+# REST FRAMEWORK
+# ======================
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -114,10 +137,8 @@ REST_FRAMEWORK = {
     ],
 }
 
-# ------- Custom Env Variables -------
-FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# ======================
+# CUSTOM ENV VARS
+# ======================
+FRONTEND_ORIGIN = os.environ.get("FRONTEND_ORIGIN")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
