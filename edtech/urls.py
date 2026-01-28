@@ -29,9 +29,8 @@ urlpatterns = [
 ]
 
 
-# ✅ ADD THIS
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
-    )
+# ✅ ALWAYS serve media (Render free plan)
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
+)

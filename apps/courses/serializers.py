@@ -26,7 +26,7 @@ class LessonDetailSerializer(serializers.ModelSerializer):
 
 
 class TopicSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(read_only=True) 
+    image = serializers.ImageField(use_url=True) 
     lessons = LessonSerializer(many=True, read_only=True)
     quiz = QuizSerializer(read_only=True)  # One-to-One
     quizzes = serializers.SerializerMethodField()  # ← ARRAY for frontend
