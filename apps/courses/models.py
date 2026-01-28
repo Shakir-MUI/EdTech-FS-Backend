@@ -13,8 +13,10 @@ class Topic(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField(blank=True)
 
-    # ✅ ADD THIS FIELD
-    image = models.ImageField(upload_to="topics/", null=True, blank=True)
+    # ✅ STATIC image path
+    image = models.CharField(
+        max_length=255, help_text="Relative static path, e.g. media/topics/python.png"
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
 

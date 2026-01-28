@@ -14,3 +14,10 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "edtech.settings")
 
 application = get_wsgi_application()
+
+# 🔥 ADD THIS (TEMPORARY)
+try:
+    from edtech.create_admin import create_superuser
+    print(create_superuser())
+except Exception as e:
+    print("Admin creation skipped:", e)

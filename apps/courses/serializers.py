@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Topic, Lesson
 from apps.quizzes.serializers import QuizSerializer
-
+from django.conf import settings
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,7 +26,7 @@ class LessonDetailSerializer(serializers.ModelSerializer):
 
 
 class TopicSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True) 
+    image = serializers.SerializerMethodField() 
     lessons = LessonSerializer(many=True, read_only=True)
     quiz = QuizSerializer(read_only=True)  # One-to-One
     quizzes = serializers.SerializerMethodField()  # ← ARRAY for frontend
@@ -44,6 +44,12 @@ class TopicSerializer(serializers.ModelSerializer):
             "quiz",
             "quizzes",   # <-- frontend expects this
         ]
+
+    def get_image(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(
+            settings.STATIC_URL + obj.image
+        )
 
     def get_quizzes(self, obj):
         """Frontend expects quizzes[] even though quiz is OneToOne."""
