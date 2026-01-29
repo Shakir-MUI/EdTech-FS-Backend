@@ -8,10 +8,6 @@ services:
   
     startCommand: |
       python manage.py migrate &&
-      python manage.py loaddata fixtures/topics.yaml &&
-      python manage.py loaddata fixtures/lessons.yaml &&
-      python manage.py loaddata fixtures/quizzes.yaml &&
-      python manage.py loaddata fixtures/questions.yaml &&
       python manage.py collectstatic --noinput &&
       gunicorn edtech.wsgi:application
 
